@@ -30,7 +30,7 @@
 #define FELTGRIDDEFINITIONTEST_H_
 
 #include <cppunit/extensions/HelperMacros.h>
-#include "../FeltGridDefinition.h"
+#include <FeltGridDefinition.h>
 
 class FeltGridDefinitionTest : public CppUnit::TestFixture
 {
