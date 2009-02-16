@@ -81,16 +81,11 @@ FeltGridDefinitionPtr FeltField::projectionInformation() const
 	FeltGridDefinitionPtr ret = FeltGridDefinitionPtr(new FeltGridDefinition(gType,
 														xNum(),
 														yNum(),
-														static_cast<short int>(getGridHeader_()[15])/100.0,
-														static_cast<short int>(getGridHeader_()[14])/100.0,
-														static_cast<short int>(getGridHeader_()[17])/100.0,
-														static_cast<short int>(getGridHeader_()[16])/100.0,
+														static_cast<short int>(getGridHeader_()[14]),
+														static_cast<short int>(getGridHeader_()[15]),
+														static_cast<short int>(getGridHeader_()[16]),
+														static_cast<short int>(getGridHeader_()[17]),
 														extraGeometrySpec));
-
-//	contentSummary(std::cout, * ret);
-
-
-
 	return ret;
 }
 

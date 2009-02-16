@@ -110,6 +110,10 @@ void FeltLoader::load(const felt::FeltField & field)
 				& data[0],
 				data.size() );
 	}
+	catch ( wdb::WdbDoNotLoadException &e)
+	{
+		log.infoStream() << e.what();
+	}
 	catch ( std::exception & e )
 	{
 		log.errorStream() << e.what();

@@ -115,8 +115,8 @@ public:
             if ( return_ < 0 )
             {
                 WDB_LOG & log = WDB_LOG::getInstance( "wdb.feltLoad.parameter" );
-                log.infoStream() << "Parameter is on database exclusion list, and should not be loaded";
-                throw WdbDoNotLoadException( "Should not load this parameter", __func__ );
+                log.infoStream() << "Parameter " << feltParam_ << " is on database exclusion list, and should not be loaded";
+                throw WdbDoNotLoadException( "The parameter was not loaded", __func__ );
             }
   			return;
   		}

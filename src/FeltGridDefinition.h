@@ -36,7 +36,11 @@
 class FeltGridDefinition
 {
 public:
-    FeltGridDefinition(int gridType, int iNum, int jNum, float startLongitude, float startLatitude, float iInc, float jInc, const std::vector<short int> & extraData);
+	/** Default Constructor
+	 * The parameters a, b, c, d are words 15 to 18 in the FELT header definition. These usually describe elements
+	 * of the grid specification (variable meaning, depending on the grid specification used)
+	 */
+    FeltGridDefinition(int gridType, int iNum, int jNum, int a, int b, int c, int d, const std::vector<short int> & extraData);
     virtual ~FeltGridDefinition();
     virtual std::string projDefinition() const;
     virtual std::string wktGeometry();
@@ -57,6 +61,9 @@ protected:
 private:
 	std::string getProjDefinition_(int gridType, const float * gs) const;
     GridGeometry::Orientation getScanMode_(float * gs, int jNum) const;
+    void polarStereographicProj(int gridType, int iNum, int jNum, float poleX, float poleY, float gridD, float rot, const std::vector<short int> & extraData);
+    void geographicProj(int gridType, int iNum, int jNum, float startLongitude, float startLatitude, float iInc, float jInc, const std::vector<short int> & extraData);
+
 };
 
 std::ostream & contentSummary(std::ostream & out, const FeltGridDefinition & grid);

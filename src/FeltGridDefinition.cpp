@@ -35,12 +35,17 @@
 std::string FeltGridDefinition::getProjDefinition_(int gridType, const float * gs) const
 {
     std::ostringstream projStr;
-    if(gridType == 2){
-        projStr << "+proj=longlat";
-    }else{
-        projStr << "+proj=ob_tran +o_proj=longlat +lon_0=" << (gs[4]) << " +o_lat_p=" << (90 - gs[5]);
+    switch (gridType) {
+    case 1:
+    	projStr << "+proj=stere +lat_0=90 +lon_0=" << (gs[3]) << " +lat_ts=" << (gs[4]) << " +a=6371000 +units=m +no_defs";
+    	break;
+    case 2:
+        projStr << "+proj=longlat +a=6367470.0 +no_defs";
+        break;
+    case 3:
+        projStr << "+proj=ob_tran +o_proj=longlat +lon_0=" << (gs[4]) << " +o_lat_p=" << (90 - gs[5]) << " +a=6367470.0 +no_defs";
+        break;
     }
-    projStr << " +a=6367470.0 +no_defs";
     return projStr.str();
 }
 
@@ -58,27 +63,78 @@ GridGeometry::Orientation FeltGridDefinition::getScanMode_(float * gs, int jNum)
 }
 
 FeltGridDefinition::FeltGridDefinition( int gridType,
-										int iNum, int jNum,
-										float startLongitude, float startLatitude,
-										float iInc, float jInc,
+										int iNum, int jNum, int a, int b, int c, int d,
 										const std::vector<short int> & extraData) :
 											geometry_(0)
 {
-    WDB_LOG & log = WDB_LOG::getInstance( "wdb.feltLoad.GridDefinition" );
     switch (gridType){
-        case 2:
-        case 3:
-            break;
-        case 0:
-            throw std::invalid_argument("Unspecified grid is not supported");
-        case 1:
-        case 4:
-            throw std::invalid_argument("Polar stereographic grid is not supported");
-        case 5:
-            throw std::invalid_argument("Mercator grid is not supported");
-        default:
-            throw std::invalid_argument("Unknown grid specification");
+    case 0:
+        throw std::invalid_argument("Unspecified grid is not supported");
+    case 1:
+        polarStereographicProj( gridType, iNum, jNum, a/100.0, b/100.0, (c * 1000.0) / 10.0, d, extraData );
+        // a, b - scaled up by 100
+        // c - convert km to m, scaled up by 10
+        break;
+    case 2:
+    case 3:
+      	geographicProj( gridType, iNum, jNum, b/100.0, a/100.0, d/100.0, c/100.0, extraData );
+        break;
+    case 4:
+		throw std::invalid_argument("Non-standard polar stereographic grid is not supported");
+    case 5:
+        throw std::invalid_argument("Mercator grid is not supported");
+    default:
+        throw std::invalid_argument("Unknown grid specification");
     }
+}
+
+FeltGridDefinition::~FeltGridDefinition()
+{
+	delete geometry_;
+}
+
+void
+FeltGridDefinition::polarStereographicProj( int gridType, int iNum, int jNum,
+									        float poleX, float poleY,
+									        float gridD, float rot,
+									        const std::vector<short int> & extraData)
+{
+    WDB_LOG & log = WDB_LOG::getInstance( "wdb.feltLoad.GridDefinition" );
+    log.infoStream() << "Polar stereographic projection identified in FELT file";
+    const int gsSize = 6;
+    float scale = 10000.0;
+    float gs[gsSize];
+    if ( extraData.empty() )
+    {
+        gs[0] = poleX;
+        gs[1] = poleY;
+        gs[2] = gridD;
+        gs[3] = rot;
+        gs[4] = 60.0;
+        gs[5] = 0.0;
+    }
+	else
+		throw wdb::WdbException("The encoded polar stereographic grid specification in the FELT file is not supported", __func__);
+
+    log.infoStream() << "Size of Grid: " << iNum << " x " << jNum;
+    log.infoStream() << "Grid Specification: " << gs[0] << " | " << gs[1] << " | " << gs[2] << " | " << gs[3] << " | " << gs[4] << " | " << gs[5];
+    projDef_ = getProjDefinition_(gridType, gs);
+    log.infoStream() << "Proj Specification: " << projDef_;
+
+    GridGeometry::Orientation scanMode = GridGeometry::LeftLowerHorizontal; // Default
+    float startX = ( 0 - gs[0] ) * gs[2];
+    float startY = ( 0 - gs[1] ) * gs[2];
+    geometry_ = new GridGeometry(projDef_, scanMode, iNum, jNum, gs[2], gs[2], startX, startY );
+}
+
+void
+FeltGridDefinition::geographicProj( int gridType, int iNum, int jNum,
+									float startLongitude, float startLatitude,
+									float iInc, float jInc,
+									const std::vector<short int> & extraData)
+{
+    WDB_LOG & log = WDB_LOG::getInstance( "wdb.feltLoad.GridDefinition" );
+    log.infoStream() << "Geographic projection identified in FELT file";
     const int gsSize = 6;
     float scale = 10000.0;
     float gs[gsSize];
@@ -116,12 +172,7 @@ FeltGridDefinition::FeltGridDefinition( int gridType,
     log.infoStream() << "Proj Specification: " << projDef_;
 
     GridGeometry::Orientation scanMode = getScanMode_(gs, jNum);
-    geometry_ = new GridGeometry(projDef_, scanMode, iNum, jNum, gs[2], gs[3], gs[0], gs[1]);
-}
-
-FeltGridDefinition::~FeltGridDefinition()
-{
-	delete geometry_;
+    geometry_ = new GridGeometry(projDef_, scanMode, iNum, jNum, iInc, jInc, startLongitude, startLatitude);
 }
 
 std::string FeltGridDefinition::projDefinition() const

@@ -22,7 +22,7 @@ AM_CXXFLAGS = $(wdb_CFLAGS)
 	
 feltLoad_CPPFLAGS =  
 feltLoad_LDADD = $(wdb_LIBS) \
-				-lwdbLoaderBase -lwdbConfiguration -lwdbProjection -lwdbException -lwdbLogHandler
+				-lwdbLoaderBase -lwdbConfiguration -lwdbProjection -lwdbException -lwdbLogHandler -lwdbMath
 
 
 SED_SUBSTITUTION = 		sed s/__WDB_VERSION__/$(WDB_VERSION)/g $<\
