@@ -118,6 +118,7 @@ FeltGridDefinition::polarStereographicProj( int gridType, int iNum, int jNum,
 
     log.infoStream() << "Size of Grid: " << iNum << " x " << jNum;
     log.infoStream() << "Grid Specification: " << gs[0] << " | " << gs[1] << " | " << gs[2] << " | " << gs[3] << " | " << gs[4] << " | " << gs[5];
+    log.infoStream() << "Grid Type: " << gridType;
     projDef_ = getProjDefinition_(gridType, gs);
     log.infoStream() << "Proj Specification: " << projDef_;
 
@@ -168,6 +169,7 @@ FeltGridDefinition::geographicProj( int gridType, int iNum, int jNum,
 
 
     log.infoStream() << "Grid Specification: " << gs[0] << " | " << gs[1] << " | " << gs[2] << " | " << gs[3] << " | " << gs[4] << " | " << gs[5];
+    log.infoStream() << "Grid Type: " << gridType;
     projDef_ = getProjDefinition_(gridType, gs);
     log.infoStream() << "Proj Specification: " << projDef_;
 
