@@ -1,0 +1,13 @@
+Source: feltLoad  
+Section: science
+Priority: extra
+Maintainer: Vegard Bønes <wdb@met.no>
+Build-Depends: debhelper (>= 5), autoconf,
+ automake1.9, wdbloaderbase
+Build-Conflicts: autoconf2.13, automake1.4
+Standards-Version: 3.7.2
+
+Package: feltload
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, wdbloaderbase
+Description: Load met.no proprietary FELT files into wdb
