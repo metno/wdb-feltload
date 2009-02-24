@@ -1,4 +1,4 @@
-Source: feltLoad  
+Source: feltload  
 Section: science
 Priority: extra
 Maintainer: Vegard Bønes <wdb@met.no>
@@ -11,3 +11,5 @@ Package: feltload
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, wdbloaderbase
 Description: Load met.no proprietary FELT files into wdb
+ A loader program for transferring forecasts from met.no FELT files into a 
+ wdb database

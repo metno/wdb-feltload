@@ -12,10 +12,10 @@ ACLOCAL_AMFLAGS = 		-I config
 # Share directory organization
 wdbdatadir = 			$(datadir)/wdb
 sqldir = 				$(wdbdatadir)/sql
-
+wdblibdir = $(libdir)/wdb
 
 # Setting Targets
-pkglib_PROGRAMS = feltLoad
+wdblib_PROGRAMS = feltLoad
 
 # This is to be replaced by a "find wdb" macro:
 AM_CXXFLAGS = $(wdb_CFLAGS)
