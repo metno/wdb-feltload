@@ -36,7 +36,7 @@
 class FeltGridDefinition
 {
 public:
-	/** Default Constructor
+	/**
 	 * The parameters a, b, c, d are words 15 to 18 in the FELT header definition. These usually describe elements
 	 * of the grid specification (variable meaning, depending on the grid specification used)
 	 */
