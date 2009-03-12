@@ -71,9 +71,14 @@ FeltGridDefinition::FeltGridDefinition( int gridType,
     case 0:
         throw std::invalid_argument("Unspecified grid is not supported");
     case 1:
-        polarStereographicProj( gridType, iNum, jNum, a/100.0, b/100.0, (c * 1000.0) / 10.0, d, extraData );
-        // a, b - scaled up by 100
+        // a, b - scaled up by 100 if c (grid distance) is positive
         // c - convert km to m, scaled up by 10
+    	if (c >= 0) {
+    		polarStereographicProj( gridType, iNum, jNum, a/100.0, b/100.0, (c * 1000.0) / 10.0, d, extraData );
+    	}
+    	else {
+    		polarStereographicProj( gridType, iNum, jNum, a, b, (c * -1000.0) / 10.0, d, extraData );
+    	}
         break;
     case 2:
     case 3:
