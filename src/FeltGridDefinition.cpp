@@ -67,6 +67,7 @@ FeltGridDefinition::FeltGridDefinition( int gridType,
 										const std::vector<short int> & extraData) :
 											geometry_(0)
 {
+    WDB_LOG & log = WDB_LOG::getInstance( "wdb.feltLoad.GridDefinition" );
     switch (gridType){
     case 0:
         throw std::invalid_argument("Unspecified grid is not supported");
@@ -74,10 +75,12 @@ FeltGridDefinition::FeltGridDefinition( int gridType,
         // a, b - scaled up by 100 if c (grid distance) is positive
         // c - convert km to m, scaled up by 10
     	if (c >= 0) {
+		    log.infoStream() << "Low granularity grids";
     		polarStereographicProj( gridType, iNum, jNum, a/100.0, b/100.0, (c * 1000.0) / 10.0, d, extraData );
     	}
     	else {
-    		polarStereographicProj( gridType, iNum, jNum, a, b, (c * -1000.0) / 10.0, d, extraData );
+			log.infoStream() << "High granularity grids";
+   			polarStereographicProj( gridType, iNum, jNum, a, b, (c * -1000.0) / 10.0, d, extraData );
     	}
         break;
     case 2:
