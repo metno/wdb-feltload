@@ -182,7 +182,7 @@ FeltGridDefinition::geographicProj( int gridType, int iNum, int jNum,
     log.infoStream() << "Proj Specification: " << projDef_;
 
     GridGeometry::Orientation scanMode = getScanMode_(gs, jNum);
-    geometry_ = new GridGeometry(projDef_, scanMode, iNum, jNum, iInc, jInc, startLongitude, startLatitude);
+    geometry_ = new GridGeometry(projDef_, scanMode, iNum, jNum, gs[2], gs[3], gs[0], gs[1]);
 }
 
 std::string FeltGridDefinition::projDefinition() const

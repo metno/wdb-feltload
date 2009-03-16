@@ -133,6 +133,8 @@ long int FeltLoader::placeId(const FeltField & field)
 //	if ( projection->getScanMode() != GridGeometry::LeftLowerHorizontal ) {
 //		projection->setScanMode( GridGeometry::LeftLowerHorizontal );
 //	}
+	log.infoStream() << "PlaceId with iInc: " << projection->getIIncrement()
+					 << " jInc: " << projection->getJIncrement();
 	try
 	{
 		return connection_.getPlaceId(
