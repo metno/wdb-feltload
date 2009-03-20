@@ -2,8 +2,7 @@ Source: feltload
 Section: science
 Priority: extra
 Maintainer: Vegard Bønes <wdb@met.no>
-Build-Depends: debhelper (>= 5), autoconf,
- automake (>=1.9), wdbloaderbase
+Build-Depends: debhelper (>= 5), autotools-dev, wdbloaderbase
 Build-Conflicts: autoconf2.13, automake1.4
 Standards-Version: 3.7.2
 
