@@ -55,7 +55,7 @@ include test/feltLoad.mk
 PKG_DIR = $(PACKAGE)-$(VERSION)
 DEBIAN_DIR = $(PKG_DIR)/debian
 DEBIAN_PACKAGE = $(PACKAGE)_$(VERSION)
-DEBIAN_VERSION = 4
+DEBIAN_VERSION = 1
 ARCH = `dpkg-architecture -qDEB_HOST_ARCH_CPU`
 DEBIAN_PACKAGE_NAME = $(DEBIAN_PACKAGE)-$(DEBIAN_VERSION)_$(ARCH).deb
 
@@ -64,17 +64,19 @@ debian:	dist clean-debian
 	mkdir -p $(DEBIAN_DIR)
 	rm -rf $(DEBIAN_DIR)/*
 	cp -r $(top_srcdir)/debian_files/* $(DEBIAN_DIR)
+	chmod 744 $(DEBIAN_DIR)/rules
 	cp $(PKG_DIR).tar.gz $(DEBIAN_PACKAGE).orig.tar.gz
 	cd $(PKG_DIR) && dpkg-buildpackage -rfakeroot -us -uc
 	lintian $(DEBIAN_PACKAGE_NAME)
-	linda $(DEBIAN_PACKAGE_NAME)
+#	linda $(DEBIAN_PACKAGE_NAME)
 
 update-debian:
 	rm -rf $(DEBIAN_DIR)/*
 	cp -r $(top_srcdir)/debian_files/* $(DEBIAN_DIR)
+	chmod 744 $(DEBIAN_DIR)/rules
 	cd $(PKG_DIR) && dpkg-buildpackage -rfakeroot -us -uc -nc
 	lintian $(DEBIAN_PACKAGE_NAME)
-	linda $(DEBIAN_PACKAGE_NAME)
+#	linda $(DEBIAN_PACKAGE_NAME)
 
 
 clean-debian:
