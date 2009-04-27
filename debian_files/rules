@@ -65,8 +65,8 @@ install: build
 	dh_clean -k 
 	dh_installdirs
 
-	# Add here commands to install the package into debian/moxload.
-m	$(MAKE) DESTDIR=$(CURDIR)/debian/moxload install
+	# Add here commands to install the package into debian/feltload.
+	$(MAKE) DESTDIR=$(CURDIR)/debian/feltload install
 
 
 # Build architecture-independent files here.

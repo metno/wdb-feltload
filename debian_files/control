@@ -1,4 +1,4 @@
-Source: moxload  
+Source: feltload  
 Section: science
 Priority: extra
 Maintainer: Vegard Bønes <wdb@met.no>
@@ -6,8 +6,9 @@ Build-Depends: debhelper (>= 5), autotools-dev, wdbloaderbase
 Build-Conflicts: autoconf2.13, automake1.4
 Standards-Version: 3.7.2
 
-Package: moxload
+Package: feltload
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, wdbloaderbase
-Description: Load mox files into wdb
- Loader program for loading mox xml files into the wdb database
+Description: Load met.no proprietary FELT files into wdb
+ A loader program for transferring forecasts from met.no FELT files into a 
+ wdb database

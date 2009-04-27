@@ -19,7 +19,7 @@ set -e
 
 case "$1" in
     configure)
-		su postgres -c "/usr/bin/wdb createuser moxLoad write"
+		#su postgres -c "/usr/bin/wdb createuser feltLoad write"
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
