@@ -53,10 +53,9 @@ void printIt(const FeltGridDefinition & def)
 void FeltGridDefinitionTest::test()
 {
 	std::vector<short int> extraData;
-    FeltGridDefinition def(2, 187, 109, -21, 84, 0.5, -0.5, extraData);
-//    printIt(def);
-
-//    std::cout << def.geometry()<< endl;
+    FeltGridDefinition def(2, 187, 109, 8400, -2100, -50, 50, extraData);
+    //printIt(def);
+    //std::cout << def.geometry()<< endl;
 
     CPPUNIT_ASSERT_EQUAL(string("+proj=longlat +a=6367470.0 +no_defs"), def.projDefinition());
     CPPUNIT_ASSERT_EQUAL(187, def.getINumber());
@@ -67,29 +66,30 @@ void FeltGridDefinitionTest::test()
     CPPUNIT_ASSERT_DOUBLES_EQUAL(30.0, def.startLatitude(), 0);
     CPPUNIT_ASSERT_EQUAL(GridGeometry::LeftUpperHorizontal, def.getScanMode());
 
-//    cout << def.wktGeometry() << endl;
+    //cout << def.wktGeometry() << endl;
 }
 
 void FeltGridDefinitionTest::testNegativeX()
 {
 	// Functionality is not yet implemented
 	// Remember to uncomment in header file if you wish to introduce this test
-
-
+	/*
 	std::vector<short int> extraData;
     FeltGridDefinition def(2, 2, 3, 10, 100, -1, 1, extraData);
-//    printIt(def);
+	// printIt(def);
 
     CPPUNIT_ASSERT_DOUBLES_EQUAL(9, def.startLongitude(), 0);
     CPPUNIT_ASSERT_DOUBLES_EQUAL(100, def.startLatitude(), 0);
     //CPPUNIT_ASSERT_EQUAL(GridGeometry::RightLowerHorizontal, def.getScanMode());
+     *
+     */
 }
 
 void FeltGridDefinitionTest::testNegativeY()
 {
 	std::vector<short int> extraData;
-    FeltGridDefinition def(2, 3, 2, 100, 10, 1, -1, extraData);
-//    printIt(def);
+    FeltGridDefinition def(2, 3, 2, 1000, 10000, -100, 100, extraData);
+    //printIt(def);
 
     CPPUNIT_ASSERT_DOUBLES_EQUAL(100, def.startLongitude(), 0);
     CPPUNIT_ASSERT_DOUBLES_EQUAL(9, def.startLatitude(), 0);
