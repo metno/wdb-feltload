@@ -31,7 +31,7 @@
 
 #include "FeltDatabaseInterface.h"
 
-class FakeDatabaseConnection : public wdb::database::FeltDatabaseInterface
+class FakeDatabaseConnection : public wdb::load::FeltDatabaseInterface
 {
 public:
 	FakeDatabaseConnection()
@@ -47,7 +47,7 @@ public:
 				    const std::string & validTimeTo,
 				    int validTimeIndCode,
 				    int valueparameter,
-					std::vector <wdb::database::WdbLevel *> & levels,
+					std::vector <wdb::load::WdbLevel *> & levels,
 		   			int dataVersion,
 				    int qualityCode,
 	 			    const double * values,
@@ -99,7 +99,7 @@ public:
 	{
     	return 1;
 	}
-    virtual void getAdditionalLevels( 	std::vector <wdb::database::WdbLevel *> & levels,
+    virtual void getAdditionalLevels( 	std::vector <wdb::load::WdbLevel *> & levels,
     							int feltParameter,
     			                int feltLevelParameter,
     			                int levelFrom,

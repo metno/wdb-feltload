@@ -39,6 +39,7 @@ std::string FeltGridDefinition::getProjDefinition_(int gridType, const float * g
     case 1:
     	projStr << "+proj=stere +lat_0=90 +lon_0=" << (gs[3]) << " +lat_ts=" << (gs[4]) << " +a=6371000 +units=m +no_defs";
     	break;
+    // TODO: Check the earth diameter ... again
     case 2:
         projStr << "+proj=longlat +a=6367470.0 +no_defs";
         break;
@@ -229,6 +230,42 @@ float
 FeltGridDefinition::startLongitude() const
 {
 	return geometry_->startingLongitude_;
+};
+
+int
+FeltGridDefinition::numberX() const
+{
+    return geometry_->xNumber_;
+};
+
+int
+FeltGridDefinition::numberY() const
+{
+    return geometry_->yNumber_;
+};
+
+float
+FeltGridDefinition::incrementX() const
+{
+	return geometry_->xIncrement_;
+};
+
+float
+FeltGridDefinition::incrementY() const
+{
+	return geometry_->yIncrement_;
+};
+
+float
+FeltGridDefinition::startX() const
+{
+	return geometry_->startingLongitude_;
+};
+
+float
+FeltGridDefinition::startY() const
+{
+	return geometry_->startingLatitude_;
 };
 
 void

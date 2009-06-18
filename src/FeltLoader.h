@@ -30,19 +30,14 @@
 #define FELTLOADER_H_
 
 #include "feltConstants.h"
+#include <wdbLogHandler.h>
 #include <wdb/WdbLevel.h>
+#include <WdbConfigFile.h>
 #include <wdb/LoaderConfiguration.h>
+#include <wdb/LoaderDatabaseConnection.h>
 #include <boost/date_time/posix_time/posix_time_types.hpp>
 #include <vector>
-
-namespace wdb
-{
-class WdbLogHandler;
-namespace database
-{
-class FeltDatabaseConnection;
-}
-}
+#include <tr1/unordered_map>
 
 namespace felt
 {
@@ -52,8 +47,8 @@ class FeltField;
 class FeltLoader
 {
 public:
-	FeltLoader(wdb::database::FeltDatabaseConnection & connection,
-			const wdb::LoaderConfiguration::LoadingOptions & loadingOptions,
+	FeltLoader(wdb::load::LoaderDatabaseConnection & connection,
+			const wdb::load::LoaderConfiguration::LoadingOptions & loadingOptions,
 			wdb::WdbLogHandler & logHandler);
 	~FeltLoader();
 
@@ -62,26 +57,38 @@ public:
 private:
 	void load(const FeltField & field);
 
-	long int dataProvider(const FeltField & field);
-	long int placeId(const FeltField & field);
+    void getValues(std::vector<double> & out, const FeltField & field);
+	std::string dataProviderName( const FeltField & field );
+	std::string placeName( const FeltField & field );
 	boost::posix_time::ptime referenceTime(const FeltField & field);
 	boost::posix_time::ptime validTimeFrom(const FeltField & field);
 	boost::posix_time::ptime validTimeTo(const FeltField & field);
-	int validTimeIndCode(const FeltField & field);
-	int valueparameter(const FeltField & field, std::string & valueUnit);
-	void levels( std::vector<wdb::database::WdbLevel> & out, const FeltField & field );
+	std::string valueParameterName( const FeltField & field );
+	std::string valueParameterUnit( const FeltField & field );
+	void levelValues( std::vector<wdb::load::Level> & levels, const FeltField & field );
 	int dataVersion(const FeltField & field);
-    int qualityCode(const FeltField & field);
-    void getValues(std::vector<double> & out, const FeltField & field);
-
+	int confidenceCode(const FeltField & field);
     void gridToLeftLowerHorizontal( std::vector<double> & out, const FeltField & field );
 
 private:
-//	std::map<felt::word, long int> felt2wdbDataProvider_;
-
-	wdb::database::FeltDatabaseConnection & connection_;
-	const wdb::LoaderConfiguration::LoadingOptions & loadingOptions_;
+	/// The Database Connection
+	wdb::load::LoaderDatabaseConnection & connection_;
+	/// The feltLoad Configuration
+	const wdb::load::LoaderConfiguration::LoadingOptions & loadingOptions_;
+	/// The feltLoad Logger
 	wdb::WdbLogHandler & logHandler_;
+
+	/// Conversion Hash Map - Dataprovider Name
+	wdb::WdbConfigFile felt2DataProviderName_;
+	/// Conversion Hash Map - Value Parameter
+	wdb::WdbConfigFile felt2ValidTime_;
+	/// Conversion Hash Map - Value Parameter
+	wdb::WdbConfigFile felt2ValueParameter_;
+	/// Conversion Hash Map - Level Parameter
+	wdb::WdbConfigFile felt2LevelParameter_;
+	/// Conversion Hash Map - Level Additions
+	wdb::WdbConfigFile felt2LevelAdditions_;
+
 };
 
 }

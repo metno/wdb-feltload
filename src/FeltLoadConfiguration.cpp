@@ -1,7 +1,7 @@
 /*
- wdb
+ feltLoad
 
- Copyright (C) 2007 met.no
+ Copyright (C) 2009 met.no
 
  Contact information:
  Norwegian Meteorological Institute
@@ -26,25 +26,29 @@
  MA  02110-1301, USA
  */
 
-#ifndef FELTTYPECONVERSION_H_
-#define FELTTYPECONVERSION_H_
+#include "FeltLoadConfiguration.h"
 
-#include "feltConstants.h"
-#include <boost/date_time/posix_time/posix_time_types.hpp>
+namespace
+{
+using namespace boost::program_options;
 
-namespace felt
+options_description
+getFeltLoading( FeltLoadConfiguration::FeltLoadingOptions & out )
 {
-template<typename T>
-T get(word w)
-{
-	return (T) w;
+    options_description input( "Felt Loading" );
+    input.add_options()
+    ( "referenceTime,t", value<std::string>( & out.referenceTime ), "Store data into database using the given reference time, instead of whatever the given document(s) say" )
+    ;
+
+	return input;
+}
 }
 
-boost::posix_time::ptime parseTime(const word * data);
 
-boost::posix_time::ptime parseTimeNoThrow(const word * data);
-
-
+FeltLoadConfiguration::FeltLoadConfiguration(const std::string & defaultDataProvider) :
+	wdb::load::LoaderConfiguration( defaultDataProvider )
+{
+	cmdOptions().add( getFeltLoading( feltLoading_ ) );
+	configOptions().add( getFeltLoading( feltLoading_ ) );
+	shownOptions().add( getFeltLoading( feltLoading_ ) );
 }
-
-#endif /*FELTTYPECONVERSION_H_*/

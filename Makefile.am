@@ -12,17 +12,19 @@ ACLOCAL_AMFLAGS = 		-I config
 # Share directory organization
 wdbdatadir = 			$(datadir)/wdb
 sqldir = 				$(wdbdatadir)/sql
-wdblibdir = $(libdir)/wdb
+wdblibdir = 			$(libdir)/wdb
+pkgsysconfdir = 		@sysconfdir@/feltLoad
+
 
 # Setting Targets
 wdblib_PROGRAMS = feltLoad
 
 # This is to be replaced by a "find wdb" macro:
-AM_CXXFLAGS = $(wdb_CFLAGS)
+AM_CXXFLAGS =			-DSYSCONFDIR=\"$(pkgsysconfdir)\" $(wdb_CFLAGS)
 	
 feltLoad_CPPFLAGS =  
 feltLoad_LDADD = $(wdb_LIBS) \
-				-lwdbLoaderBase -lwdbConfiguration -lwdbProjection -lwdbException -lwdbLogHandler -lwdbMath
+				-lwdbLoad -lwdbConfiguration -lwdbProjection -lwdbException -lwdbLogHandler -lwdbMath
 
 
 SED_SUBSTITUTION = 		sed s/__WDB_VERSION__/$(WDB_VERSION)/g $<\
@@ -46,6 +48,7 @@ SED_SUBSTITUTION = 		sed s/__WDB_VERSION__/$(WDB_VERSION)/g $<\
 
 EXTRA_DIST =
 
+include etc/feltLoad.mk
 include src/feltLoad.mk
 include test/feltLoad.mk
 ###

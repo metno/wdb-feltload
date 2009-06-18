@@ -50,6 +50,12 @@ public:
     virtual float getJIncrement() const;
     virtual float startLongitude() const;
     virtual float startLatitude() const;
+    virtual int numberX() const;
+    virtual int numberY() const;
+    virtual float incrementX() const;
+    virtual float incrementY() const;
+    virtual float startX() const;
+    virtual float startY() const;
     GridGeometry::Orientation getScanMode() const;
     void setScanMode(GridGeometry::Orientation mode);
 

@@ -1,7 +1,7 @@
 /*
  wdb
 
- Copyright (C) 2007 met.no
+ Copyright (C) 2007-2009 met.no
 
  Contact information:
  Norwegian Meteorological Institute
@@ -29,11 +29,10 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
+#include "FeltLoadConfiguration.h"
 #include "FeltFile.h"
 #include "FeltLoader.h"
-#include "FeltDatabaseConnection.h"
-//#include "test/FakeDatabaseConnection.h"
-//#include "FeltLoadConfiguration.h"
+#include <wdb/LoaderDatabaseConnection.h>
 #include <wdb/LoaderConfiguration.h>
 #include <wdbLogHandler.h>
 #include <boost/filesystem/path.hpp>
@@ -42,6 +41,7 @@
 #include <vector>
 
 using namespace std;
+using namespace wdb::load;
 
 // Support Functions
 namespace
@@ -53,7 +53,7 @@ namespace
  */
 void version( ostream & out )
 {
-	out << "feltLoad (" << PACKAGE << ") " << VERSION << endl;
+    out << PACKAGE_STRING << endl;
 }
 
 /**
@@ -65,7 +65,7 @@ void help( const boost::program_options::options_description & options, ostream 
 {
 	version( out );
 	out << '\n';
-    out << "Usage: feltLoad [OPTIONS] FELT_FILES...\n\n";
+    out << "Usage: "PACKAGE_NAME" [OPTIONS] FILES...\n\n";
     out << "Options:\n";
     out << options << endl;
 }
@@ -74,7 +74,7 @@ void help( const boost::program_options::options_description & options, ostream 
 
 int main(int argc, char ** argv)
 {
-	wdb::LoaderConfiguration conf("wdb_felt");
+	FeltLoadConfiguration conf;
 	try
     {
     	conf.parse( argc, argv );
@@ -88,11 +88,6 @@ int main(int argc, char ** argv)
     		version( cout );
     		return 0;
     	}
-    	if ( conf.input().file.empty() )
-    	{
-    		cerr << "No inputfile." << endl;
-    		return 1;
-    	}
     }
     catch( exception & e ) {
         cerr << e.what() << endl;
@@ -101,15 +96,17 @@ int main(int argc, char ** argv)
     }
 
 	wdb::WdbLogHandler logHandler( conf.logging().loglevel, conf.logging().logfile );
-    WDB_LOG & log = WDB_LOG::getInstance( "wdb.feltLoad.main" );
+    WDB_LOG & log = WDB_LOG::getInstance( "wdb.feltload.main" );
     log.debug( "Starting feltLoad" );
 
+    // Get list of files
     const std::vector<std::string> & file = conf.input().file;
 	std::vector<boost::filesystem::path> files;
-	copy(file.begin(), file.end(), back_inserter(files));
+	copy( file.begin(), file.end(), back_inserter(files) );
 
 	try
 	{
+		// List contents of files
 		if ( conf.output().list )
 		{
 			for ( std::vector<boost::filesystem::path>::const_iterator it = files.begin(); it != files.end(); ++ it )
@@ -130,16 +127,16 @@ int main(int argc, char ** argv)
 				}
 			}
 		}
+		// Write Files into Database
 		else
 		{
-			//FakeDatabaseConnection dbConnection;
-			wdb::database::FeltDatabaseConnection dbConnection(conf.database().pqDatabaseConnection());
-			felt::FeltLoader loader(dbConnection, conf.loading(), logHandler);
+			wdb::load::LoaderDatabaseConnection dbConnection( conf.database().pqDatabaseConnection(), conf.database().user );
+			felt::FeltLoader loader( dbConnection, conf.loading(), logHandler );
 			for ( std::vector<boost::filesystem::path>::const_iterator it = files.begin(); it != files.end(); ++ it )
 			{
 				try
 				{
-					loader.load(felt::FeltFile(*it));
+					loader.load( felt::FeltFile(*it) );
 				}
 				catch ( std::exception & e )
 				{

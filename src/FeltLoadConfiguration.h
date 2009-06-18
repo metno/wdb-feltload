@@ -1,7 +1,7 @@
 /*
- wdb
+ feltLoad
 
- Copyright (C) 2007 met.no
+ Copyright (C) 2009 met.no
 
  Contact information:
  Norwegian Meteorological Institute
@@ -26,25 +26,28 @@
  MA  02110-1301, USA
  */
 
-#ifndef FELTTYPECONVERSION_H_
-#define FELTTYPECONVERSION_H_
+#ifndef FELTLOADCONFIGURATION_H_
+#define FELTLOADCONFIGURATION_H_
 
-#include "feltConstants.h"
-#include <boost/date_time/posix_time/posix_time_types.hpp>
+#include <wdb/LoaderConfiguration.h>
+#include <string>
 
-namespace felt
+class FeltLoadConfiguration : public wdb::load::LoaderConfiguration
 {
-template<typename T>
-T get(word w)
-{
-	return (T) w;
-}
+public:
+	explicit FeltLoadConfiguration(const std::string & defaultDataProvider = "wdb_felt");
 
-boost::posix_time::ptime parseTime(const word * data);
+	struct FeltLoadingOptions
+	{
+		std::string referenceTime;
+	};
 
-boost::posix_time::ptime parseTimeNoThrow(const word * data);
+	const FeltLoadingOptions & FeltLoading() const { return feltLoading_; }
 
 
-}
 
-#endif /*FELTTYPECONVERSION_H_*/
+private:
+	FeltLoadingOptions feltLoading_;
+};
+
+#endif /* MOXLOADCONFIGURATION_H_ */

@@ -75,15 +75,6 @@ FeltFile::FeltFile(const path & file)
 		if ( f->valid() )
 			fields_.push_back(f);
 	}
-
-//	std::map<size_t, Fields::size_type> fieldIndexes_;
-//	for ( int i = 0; i < blocks; ++ i )
-//	{
-//		FeltField f(*this, i);
-//		if ( f.valid() )
-//			fieldIndexes_.push_back()
-//	}
-
 }
 
 FeltFile::~FeltFile()
@@ -145,33 +136,27 @@ boost::posix_time::ptime FeltFile::lastTime() const
 FeltFile::iterator FeltFile::begin()
 {
 	return fields_.begin();
-//	return iterator(*this);
 }
 
 FeltFile::iterator FeltFile::end()
 {
 	return fields_.end();
-//	return iterator();
 }
 
 FeltFile::const_iterator FeltFile::begin() const
 {
 	return fields_.begin();
-//	return iterator(*this);
 }
 
 FeltFile::const_iterator FeltFile::end() const
 {
 	return fields_.end();
-//	return iterator();
 }
 
 bool FeltFile::complete() const
 {
 	felt::word updateInProgress = block1_[14];
-
 	// expected value is 0 or 1
-
 	return not updateInProgress;
 }
 
@@ -187,8 +172,6 @@ void swapByteOrder(word & w)
 
 FeltFile::Block FeltFile::getBlock_(size_type blockNo) const
 {
-//	return get_(blockNo * blockWords, blockWords);
-
 	Block ret(new word[blockWords]);
 
 	feltFile_->seekg(blockNo * blockWords * sizeof(word), ios_base::beg);
@@ -202,7 +185,6 @@ FeltFile::Block FeltFile::getBlock_(size_type blockNo) const
 
 void FeltFile::get_(std::vector<word> & out, size_type fromWord, size_type noOfWords) const
 {
-	size_t oldLength = out.size();
 	out.resize(noOfWords);
 
 	feltFile_->seekg(fromWord * sizeof(word), ios_base::beg);
@@ -215,75 +197,6 @@ void FeltFile::get_(std::vector<word> & out, size_type fromWord, size_type noOfW
 const FeltField & FeltFile::getField(size_t idx) const
 {
 	return * fields_.at(idx);
-//	//boost::shared_ptr<FeltField> ret = fields_->at(idx).lock();
-//
-//	if ( idx >= size() )
-//		throw std::out_of_range("field index out of range");
-//
-//	boost::shared_ptr<FeltField> ret = fields_[idx].lock();
-//	if ( ! ret )
-//	{
-//		ret = boost::shared_ptr<FeltField>(new FeltField(*this, idx));
-//		fields_[idx] = ret;
-//	}
-//	return ret;
 }
-
-/*
-FeltFile::iterator & FeltFile::iterator::operator ++ ()
-{
-	try
-	{
-		data_ = ff_->getField(++ index_); // boost::shared_ptr<value_type>(new FeltField(data_->feltFile(), data_->index() +1));
-		if ( data_->gridSize() == 0 )
-			return operator++();
-	}
-	catch ( std::out_of_range & )
-	{
-		data_ = boost::shared_ptr<value_type>();
-	}
-	return * this;
-}
-
-FeltFile::iterator FeltFile::iterator::operator ++ (int)
-{
-	iterator ret(*this);
-	++ *this;
-	return ret;
-}
-
-const FeltFile::iterator::reference FeltFile::iterator::operator * () const
-{
-	return * data_;
-}
-
-const FeltFile::iterator::pointer FeltFile::iterator::operator -> () const
-{
-	return data_.get();
-}
-
-bool FeltFile::iterator::operator == ( const FeltFile::iterator & i ) const
-{
-	if ( ! data_ )
-		return ! i.data_;
-
-	return data_.get() == i.data_.get();
-}
-
-bool FeltFile::iterator::operator != ( const FeltFile::iterator & i ) const
-{
-	return ! (*this == i);
-}
-
-
-FeltFile::iterator::iterator(const FeltFile & ff)
-	: data_(ff.getField(0)), ff_(& ff), index_(0)
-{}
-
-FeltFile::iterator::iterator()
-	: ff_(0)
-{}
-*/
-
 
 }
