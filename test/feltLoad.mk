@@ -23,7 +23,7 @@ wdbUnitTest_CPPFLAGS = 		$(cppunit_CFLAGS) -I$(srcdir)/test/utility/configuratio
 	
 	
 feltLoadTest_CPPFLAGS =		-I$(top_srcdir)/src $(cppunit_CFLAGS)
-feltLoadTest_LDFLAGS  =   	-ltestConfiguration $(feltLoad_LDADD) $(cppunit_LIBS)
+feltLoadTest_LDFLAGS  =   	-lwdbTest $(feltLoad_LDADD) $(cppunit_LIBS)
 
 EXTRA_DIST += 				test/FakeDatabaseConnection.h
 endif
