@@ -420,7 +420,7 @@ FeltLoader::gridToLeftLowerHorizontal(  std::vector<double> & out, const FeltFie
     {
     	std::ostringstream err;
     	err << "Invalid grid size: " << out.size() << " (should be " << nI * nJ << ")";
-    	throw wdb::WdbException(err.str(), __func__);
+    	throw std::runtime_error(err.str());
     }
 
     switch( fromMode )
@@ -437,7 +437,7 @@ FeltLoader::gridToLeftLowerHorizontal(  std::vector<double> & out, const FeltFie
             log.debugStream() << "Grid was already in requested format";
             break;
         default:
-            throw wdb::WdbException( "Unsupported field conversion", __func__ );
+            throw std::runtime_error( "Unsupported field conversion" );
     }
     projection->setScanMode(GridGeometry::LeftLowerHorizontal);
 }

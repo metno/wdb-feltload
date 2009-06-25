@@ -123,7 +123,7 @@ FeltGridDefinition::polarStereographicProj( int gridType, int iNum, int jNum,
         gs[5] = 0.0;
     }
 	else
-		throw wdb::WdbException("The encoded polar stereographic grid specification in the FELT file is not supported", __func__);
+		throw std::runtime_error("The encoded polar stereographic grid specification in the FELT file is not supported");
 
     log.infoStream() << "Size of Grid: " << iNum << " x " << jNum;
     log.infoStream() << "Grid Specification: " << gs[0] << " | " << gs[1] << " | " << gs[2] << " | " << gs[3] << " | " << gs[4] << " | " << gs[5];
@@ -165,16 +165,16 @@ FeltGridDefinition::geographicProj( int gridType, int iNum, int jNum,
 	else if ( extraData.size() == 2 + (gsSize * 3) )
 	{
 		if(extraData[0] != gsSize)
-			throw wdb::WdbException("First word in the grid encoding does not correspond to the gridspec size", __func__);
+			throw std::runtime_error("First word in the grid encoding does not correspond to the gridspec size");
 
 		if(extraData[1] != 3)
-			throw wdb::WdbException("Second word in the grid encoding does not correspond to 3 (rotated grid)", __func__);
+			throw std::runtime_error("Second word in the grid encoding does not correspond to 3 (rotated grid)");
 
 		for(int i = 0;i < gsSize;i++)
 			gs[i] = static_cast<float>((extraData[(i * 3) + 3] * scale) + extraData[(i * 3) + 4]) / (extraData[(i * 3) + 2] * 10.0);
 	}
 	else
-		throw wdb::WdbException("The encoded grid specification in the FELT file is not supported", __func__);
+		throw std::runtime_error("The encoded grid specification in the FELT file is not supported");
 
 
     log.infoStream() << "Grid Specification: " << gs[0] << " | " << gs[1] << " | " << gs[2] << " | " << gs[3] << " | " << gs[4] << " | " << gs[5];

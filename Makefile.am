@@ -24,7 +24,7 @@ AM_CXXFLAGS =			-DSYSCONFDIR=\"$(pkgsysconfdir)\" $(wdb_CFLAGS)
 	
 feltLoad_CPPFLAGS =  
 feltLoad_LDADD = $(wdb_LIBS) \
-				-lwdbLoad -lwdbConfiguration -lwdbProjection -lwdbException -lwdbLogHandler -lwdbMath
+				-lwdbLoad -lwdbConfig -lwdbProj -lwdbExcept -lwdbLog -lwdbMath
 
 
 SED_SUBSTITUTION = 		sed s/__WDB_VERSION__/$(WDB_VERSION)/g $<\
