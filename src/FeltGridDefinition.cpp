@@ -223,13 +223,13 @@ FeltGridDefinition::getJIncrement() const
 float
 FeltGridDefinition::startLatitude() const
 {
-	return geometry_->startingLatitude_;
+	return geometry_->startY_;
 };
 
 float
 FeltGridDefinition::startLongitude() const
 {
-	return geometry_->startingLongitude_;
+	return geometry_->startX_;
 };
 
 int
@@ -259,13 +259,13 @@ FeltGridDefinition::incrementY() const
 float
 FeltGridDefinition::startX() const
 {
-	return geometry_->startingLongitude_;
+	return geometry_->startX_;
 };
 
 float
 FeltGridDefinition::startY() const
 {
-	return geometry_->startingLatitude_;
+	return geometry_->startY_;
 };
 
 void

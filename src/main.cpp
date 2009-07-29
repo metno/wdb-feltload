@@ -136,7 +136,8 @@ int main(int argc, char ** argv)
 			{
 				try
 				{
-					loader.load( felt::FeltFile(*it) );
+					felt::FeltFile feltFile(* it);
+					loader.load(feltFile);
 				}
 				catch ( std::exception & e )
 				{
