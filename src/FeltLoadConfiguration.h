@@ -35,7 +35,7 @@
 class FeltLoadConfiguration : public wdb::load::LoaderConfiguration
 {
 public:
-	explicit FeltLoadConfiguration(const std::string & defaultDataProvider = "wdb_felt");
+	FeltLoadConfiguration();
 
 	struct FeltLoadingOptions
 	{

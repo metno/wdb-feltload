@@ -45,8 +45,8 @@ getFeltLoading( FeltLoadConfiguration::FeltLoadingOptions & out )
 }
 
 
-FeltLoadConfiguration::FeltLoadConfiguration(const std::string & defaultDataProvider) :
-	wdb::load::LoaderConfiguration( defaultDataProvider )
+FeltLoadConfiguration::FeltLoadConfiguration() :
+	wdb::load::LoaderConfiguration("")
 {
 	cmdOptions().add( getFeltLoading( feltLoading_ ) );
 	configOptions().add( getFeltLoading( feltLoading_ ) );
