@@ -130,7 +130,7 @@ int main(int argc, char ** argv)
 		// Write Files into Database
 		else
 		{
-			wdb::load::LoaderDatabaseConnection dbConnection( conf.database().pqDatabaseConnection(), conf.database().user );
+			wdb::load::LoaderDatabaseConnection dbConnection( conf );
 			felt::FeltLoader loader( dbConnection, conf.loading(), logHandler );
 			for ( std::vector<boost::filesystem::path>::const_iterator it = files.begin(); it != files.end(); ++ it )
 			{
