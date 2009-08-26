@@ -170,10 +170,38 @@ std::string FeltLoader::dataProviderName(const FeltField & field)
 std::string FeltLoader::placeName(const FeltField & field)
 {
 	FeltGridDefinitionPtr grid = field.projectionInformation();
-	return connection_.getPlaceName( grid->numberX(), grid->numberY(),
-									 grid->incrementX(), grid->incrementY(),
-									 grid->startX(), grid->startY(),
-									 grid->projDefinition() );
+	try
+	{
+		return connection_.getPlaceName( grid->numberX(), grid->numberY(),
+										 grid->incrementX(), grid->incrementY(),
+										 grid->startX(), grid->startY(),
+										 grid->projDefinition() );
+	}
+	catch ( std::exception & e )
+	{
+		if ( not loadingOptions_.loadPlaceDefinition )
+			throw;
+	}
+
+	std::string newPlaceName = loadingOptions_.placeName;
+	if ( newPlaceName.empty() )
+	{
+		std::ostringstream name;
+		name << grid->numberX() << ',' << grid->numberY() << " res " << grid->incrementX();
+		if ( grid->incrementX() != grid->incrementY() )
+			name << ',' << grid->incrementY();
+		name << " start " << grid->startX() << ',' << grid->startY();
+		newPlaceName = name.str();
+	}
+
+	connection_.addPlaceDefinition(
+		newPlaceName,
+		grid->numberX(), grid->numberY(),
+		grid->incrementX(), grid->incrementY(),
+		grid->startX(), grid->startY(),
+		grid->projDefinition()
+	);
+	return newPlaceName;
 }
 
 boost::posix_time::ptime FeltLoader::referenceTime(const FeltField & field)
