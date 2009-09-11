@@ -394,23 +394,28 @@ int FeltLoader::confidenceCode( const FeltField & field )
 
 namespace
 {
-struct scale_value : public std::binary_function<felt::word, double, double>
+struct value_convert : std::unary_function<felt::word, double>
 {
-	double operator () (felt::word base, double scaleFactor) const
+	double scaleFactor_;
+	double coeff_;
+	double term_;
+	double undefinedReplacement_;
+
+	value_convert(double scaleFactor, double coeff, double term, double undefinedReplacement) :
+		scaleFactor_(scaleFactor),
+		coeff_(coeff),
+		term_(term),
+		undefinedReplacement_(undefinedReplacement)
+	{}
+
+	double operator () (felt::word w) const
 	{
-		if ( felt::isUndefined(base) )
-			return base;
-		return ( double(base) * scaleFactor );
+		if ( felt::isUndefined(w) )
+			return undefinedReplacement_;
+
+		return (((double(w) * scaleFactor_) * coeff_) + term_);
 	}
 };
-
-double convertValue( felt::word base, double scaleFactor, double coeff, double term )
-{
-	if ( felt::isUndefined(base) )
-		return base;
-	return ((( double(base) * scaleFactor ) * coeff ) + term );
-}
-
 }
 
 void FeltLoader::getValues(std::vector<double> & out, const FeltField & field)
@@ -418,19 +423,15 @@ void FeltLoader::getValues(std::vector<double> & out, const FeltField & field)
 	std::vector<felt::word> rawData;
 	field.grid(rawData);
 	out.reserve(rawData.size());
+
 	double scale = std::pow(double(10), double(field.scaleFactor()));
-	std::string unit = valueParameterUnit( field );
-	float coeff = 1.0, term = 0.0;
-	connection_.readUnit( unit, &coeff, &term );
-    if ( ( coeff != 1.0 )&&( term != 0.0) ) {
-    	for ( unsigned int i=0; i<rawData.size(); i++ ) {
-   			out.push_back( convertValue(rawData[i], scale, coeff, term) );
-    	}
-    }
-    else {
-    	std::transform( rawData.begin(), rawData.end(), std::back_inserter(out),
-					    std::bind2nd(scale_value(), scale) );
-    }
+	float coeff = 1.0;
+	float term = 0.0;
+	connection_.readUnit( valueParameterUnit(field), &coeff, &term );
+
+	std::transform(rawData.begin(), rawData.end(), std::back_inserter(out),
+			value_convert(scale, coeff, term, connection_.getUndefinedValue()));
+
 	gridToLeftLowerHorizontal( out, field );
 }
 
