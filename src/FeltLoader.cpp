@@ -194,13 +194,13 @@ std::string FeltLoader::placeName(const FeltField & field)
 		newPlaceName = name.str();
 	}
 
-	connection_.addPlaceDefinition(
-		newPlaceName,
-		grid->numberX(), grid->numberY(),
-		grid->incrementX(), grid->incrementY(),
-		grid->startX(), grid->startY(),
-		grid->projDefinition()
-	);
+	newPlaceName = connection_.addPlaceDefinition(
+													newPlaceName,
+													grid->numberX(), grid->numberY(),
+													grid->incrementX(), grid->incrementY(),
+													grid->startX(), grid->startY(),
+													grid->projDefinition()
+												);
 	return newPlaceName;
 }
 
