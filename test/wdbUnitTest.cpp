@@ -30,7 +30,7 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <wdb/testConfiguration.h>
+#include "configuration/testConfiguration.h"
 #include <boost/program_options.hpp>
 #include <boost/program_options/options_description.hpp>
 

@@ -18,4 +18,4 @@ feltLoad_SOURCES =  src/main.cpp \
 					src/FeltLoadConfiguration.cpp \
 					src/FeltLoadConfiguration.h
 	
-EXTRA_DIST +=				src/feltLoad.mk
+EXTRA_DIST +=		src/feltLoad.mk

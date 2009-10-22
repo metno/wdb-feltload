@@ -51,6 +51,7 @@ EXTRA_DIST =
 include etc/feltLoad.mk
 include src/feltLoad.mk
 include test/feltLoad.mk
+include test/configuration/feltLoad.mk
 
 include config/debian.mk
 
