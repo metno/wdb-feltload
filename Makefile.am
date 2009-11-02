@@ -22,7 +22,6 @@ wdblib_PROGRAMS = feltLoad
 # This is to be replaced by a "find wdb" macro:
 AM_CXXFLAGS =			-DSYSCONFDIR=\"$(pkgsysconfdir)\" $(wdb_CFLAGS)
 	
-feltLoad_CPPFLAGS =  
 feltLoad_LDADD = $(wdb_LIBS) \
 				-lwdbLoad -lwdbConfig -lwdbProj -lwdbExcept -lwdbLog -lwdbMath
 

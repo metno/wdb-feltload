@@ -65,9 +65,15 @@ VL_LIB_READLINE
 #-----------------------------------------------------------------------------
 
 # WDBLOAD
-PKG_CHECK_MODULES( [wdbload], [libwdbLoad] )
-CPPFLAGS="$CPPFLAGS $wdbload_CPPFLAGS"
-LDFLAGSS="$LDFLAGS $wdbload_LDFLAGS"
+PKG_CHECK_MODULES([wdbload], [libwdbLoad],
+   	[
+		AC_SUBST(wdbload_CFLAGS)
+		AC_SUBST(wdbload_LIBS)
+	],
+	[AC_MSG_ERROR([Unable to find libwdbload.])
+])
+CPPFLAGS="$CPPFLAGS $wdbload_CFLAGS"
+LIBS="$LIBS $wdbload_LIBS"
 
 # BOOST
 WDB_BOOST_CHECK(1.33.1)
