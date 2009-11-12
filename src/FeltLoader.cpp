@@ -120,7 +120,7 @@ void FeltLoader::load(const felt::FeltField & field)
 	    std::string valueParameter = valueParameterName( field );
 	    std::vector<wdb::load::Level> levels;
 	    levelValues( levels, field );
-	    std::vector<double> data;
+	    std::vector<float> data;
 	    getValues(data, field);
 	    for ( unsigned int i = 0; i<levels.size(); i++ ) {
 	    	connection_.write ( & data[0],
@@ -394,31 +394,34 @@ int FeltLoader::confidenceCode( const FeltField & field )
 
 namespace
 {
-struct value_convert : std::unary_function<felt::word, double>
+template<typename T>
+struct value_convert : std::unary_function<felt::word, T>
 {
-	double scaleFactor_;
-	double coeff_;
-	double term_;
-	double undefinedReplacement_;
+	typedef T output_type;
 
-	value_convert(double scaleFactor, double coeff, double term, double undefinedReplacement) :
+	output_type scaleFactor_;
+	output_type coeff_;
+	output_type term_;
+	output_type undefinedReplacement_;
+
+	value_convert(output_type scaleFactor, output_type coeff, output_type term, output_type undefinedReplacement) :
 		scaleFactor_(scaleFactor),
 		coeff_(coeff),
 		term_(term),
 		undefinedReplacement_(undefinedReplacement)
 	{}
 
-	double operator () (felt::word w) const
+	output_type operator () (felt::word w) const
 	{
 		if ( felt::isUndefined(w) )
 			return undefinedReplacement_;
 
-		return (((double(w) * scaleFactor_) * coeff_) + term_);
+		return (((output_type(w) * scaleFactor_) * coeff_) + term_);
 	}
 };
 }
 
-void FeltLoader::getValues(std::vector<double> & out, const FeltField & field)
+void FeltLoader::getValues(std::vector<float> & out, const FeltField & field)
 {
 	std::vector<felt::word> rawData;
 	field.grid(rawData);
@@ -430,13 +433,13 @@ void FeltLoader::getValues(std::vector<double> & out, const FeltField & field)
 	connection_.readUnit( valueParameterUnit(field), &coeff, &term );
 
 	std::transform(rawData.begin(), rawData.end(), std::back_inserter(out),
-			value_convert(scale, coeff, term, connection_.getUndefinedValue()));
+			value_convert<float>(scale, coeff, term, connection_.getUndefinedValue()));
 
 	gridToLeftLowerHorizontal( out, field );
 }
 
 void
-FeltLoader::gridToLeftLowerHorizontal(  std::vector<double> & out, const FeltField & field )
+FeltLoader::gridToLeftLowerHorizontal(  std::vector<float> & out, const FeltField & field )
 {
     WDB_LOG & log = WDB_LOG::getInstance( "wdb.feltLoad.feltLoader" );
 	FeltGridDefinitionPtr projection = field.projectionInformation();

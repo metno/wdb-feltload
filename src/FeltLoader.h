@@ -57,7 +57,7 @@ public:
 private:
 	void load(const FeltField & field);
 
-    void getValues(std::vector<double> & out, const FeltField & field);
+    void getValues(std::vector<float> & out, const FeltField & field);
 	std::string dataProviderName( const FeltField & field );
 	std::string placeName( const FeltField & field );
 	boost::posix_time::ptime referenceTime(const FeltField & field);
@@ -68,7 +68,7 @@ private:
 	void levelValues( std::vector<wdb::load::Level> & levels, const FeltField & field );
 	int dataVersion(const FeltField & field);
 	int confidenceCode(const FeltField & field);
-    void gridToLeftLowerHorizontal( std::vector<double> & out, const FeltField & field );
+    void gridToLeftLowerHorizontal( std::vector<float> & out, const FeltField & field );
 
 private:
 	/// The Database Connection
