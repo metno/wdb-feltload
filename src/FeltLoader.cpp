@@ -115,6 +115,9 @@ void FeltLoader::load(const felt::FeltField & field)
     std::string unit;
 	try
 	{
+		if ( field.gridSize() < 1 )
+			throw std::runtime_error("Grid have size 0 - will not load");
+
 		if ( field.gridSize() != field.xNum() * field.yNum() )
 			throw std::runtime_error("Internal inconsistency in file - grid size does not match x-number * y-number");
 
