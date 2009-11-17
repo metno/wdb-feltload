@@ -115,6 +115,9 @@ void FeltLoader::load(const felt::FeltField & field)
     std::string unit;
 	try
 	{
+		if ( field.gridSize() != field.xNum() * field.yNum() )
+			throw std::runtime_error("Internal inconsistency in file - grid size does not match x-number * y-number");
+
 	    std::string dataProvider = dataProviderName( field );
 	    std::string place = placeName( field );
 	    std::string valueParameter = valueParameterName( field );
