@@ -69,6 +69,17 @@ boost::posix_time::ptime FeltField::validTime() const
 	return referenceTime() + boost::posix_time::hours(header_[9]);
 }
 
+int FeltField::parameter() const
+{
+	int param = parameterUnmodified_();
+
+	// Parameter is part of an ensemble run
+	if ( param >= 4000 and param < 5000 )
+		param -= 4000;
+
+	return param;
+}
+
 
 FeltGridDefinitionPtr FeltField::projectionInformation() const
 {
@@ -89,6 +100,7 @@ FeltGridDefinitionPtr FeltField::projectionInformation() const
 	return ret;
 }
 
+//	contentSummary(std::cout, * ret);
 
 int FeltField::xNum() const
 {
@@ -173,6 +185,22 @@ bool FeltField::isSane() const
 	return b[0] == header_[0] && b[1] == header_[1];
 }
 
+int FeltField::level1() const
+{
+	int ret = header_[12];
+	if ( ret == 1000 and verticalCoordinate() == 2 )
+		ret = 0;
+	return ret;
+}
+
+int FeltField::level2() const
+{
+	if ( isEpsSingleRunParameter() )
+		return level1();
+	return header_[13];
+}
+
+
 void FeltField::grid(std::vector<word> & out) const
 {
 	size_t from = (startingGridBlock() * blockWords) + 20;
@@ -212,6 +240,8 @@ size_t FeltField::gridSize() const
 
 int FeltField::dataVersion() const
 {
+	if ( isEpsSingleRunParameter() )
+		return header_[13]; // level2 unmodified
 	return 0;
 }
 

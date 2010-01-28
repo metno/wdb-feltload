@@ -61,11 +61,11 @@ public:
 	boost::posix_time::ptime referenceTime() const;
 	boost::posix_time::ptime validTime() const;
 
-	int parameter() const { return header_[11]; }
+	int parameter() const;
 
 	int verticalCoordinate() const { return header_[10]; }
-	int level1() const {return header_[12]; }
-	int level2() const {return header_[13]; }
+	int level1() const;
+	int level2() const;
 
 	/**
 	 * Read the grid from file.
@@ -75,6 +75,13 @@ public:
 	int scaleFactor() const;
 	int xNum() const;
 	int yNum() const;
+
+
+	bool isEpsSingleRunParameter() const
+	{
+		int param = parameterUnmodified_();
+		return 4000 <= param and param < 5000;
+	}
 
 	/**
 	 * Get data version if this is an eps parameter, otherwise 0
@@ -93,6 +100,7 @@ private:
 	int timeParameter() const { return header_[9]; }
 	int gridType() const { return header_[14]; }
 
+	int parameterUnmodified_() const { return header_[11]; }
 
 	/**
 	 * Checks consistency between index and grid header
