@@ -185,9 +185,14 @@ bool FeltField::isSane() const
 	return b[0] == header_[0] && b[1] == header_[1];
 }
 
+int FeltField::level1Unmodified() const
+{
+	return header_[12];
+}
+
 int FeltField::level1() const
 {
-	int ret = header_[12];
+	int ret = level1Unmodified();
 	if ( ret == 1000 and verticalCoordinate() == 2 )
 		ret = 0;
 	return ret;
