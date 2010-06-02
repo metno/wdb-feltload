@@ -326,7 +326,7 @@ void FeltLoader::levelValues( std::vector<wdb::load::Level> & levels, const Felt
 	try {
 		stringstream keyStr;
 		keyStr << field.verticalCoordinate() << ", "
-			   << field.level1Unmodified();
+			   << field.level1();
 		std::string ret;
 		try {
 			ret = felt2LevelParameter_[keyStr.str()];
@@ -360,7 +360,7 @@ void FeltLoader::levelValues( std::vector<wdb::load::Level> & levels, const Felt
 		stringstream keyStr;
 		keyStr << field.parameter() << ", "
 			   << field.verticalCoordinate() << ", "
-			   << field.level1Unmodified() << ", "
+			   << field.level1() << ", "
 			   << field.level2();
 		log.debugStream() << "Looking for levels matching " << keyStr.str();
 		std::string ret = felt2LevelAdditions_[ keyStr.str() ];

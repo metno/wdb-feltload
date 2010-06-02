@@ -100,7 +100,6 @@ FeltGridDefinitionPtr FeltField::projectionInformation() const
 	return ret;
 }
 
-//	contentSummary(std::cout, * ret);
 
 int FeltField::xNum() const
 {
@@ -185,17 +184,9 @@ bool FeltField::isSane() const
 	return b[0] == header_[0] && b[1] == header_[1];
 }
 
-int FeltField::level1Unmodified() const
-{
-	return header_[12];
-}
-
 int FeltField::level1() const
 {
-	int ret = level1Unmodified();
-	if ( ret == 1000 and verticalCoordinate() == 2 )
-		ret = 0;
-	return ret;
+	return header_[12];
 }
 
 int FeltField::level2() const

@@ -64,7 +64,6 @@ public:
 	int parameter() const;
 
 	int verticalCoordinate() const { return header_[10]; }
-	int level1Unmodified() const;
 	int level1() const;
 	int level2() const;
 
