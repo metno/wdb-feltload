@@ -1,10 +1,10 @@
 Source: feltload  
 Section: science
 Priority: extra
-Maintainer: Vegard B�nes <wdb@met.no>
+Maintainer: Vegard Bønes <wdb@met.no>
 Build-Depends: debhelper (>= 5), autotools-dev, libwdbload1
 Build-Conflicts: autoconf2.13, automake1.4
-Standards-Version: 3.7.3
+Standards-Version: 3.9.1
 
 Package: feltload
 Architecture: any
