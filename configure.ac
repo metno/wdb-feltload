@@ -13,6 +13,7 @@ AC_INIT(feltLoad, 0.9.8, [wdb@met.no])
 #AC_CONFIG_AUX_DIR([config])
 AC_CONFIG_SRCDIR([config.h.in])
 AC_CONFIG_HEADER([config.h])
+AC_CONFIG_MACRO_DIR([m4])
 
 AC_PROG_LIBTOOL
 
