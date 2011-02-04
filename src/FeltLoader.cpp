@@ -348,7 +348,17 @@ void FeltLoader::levelValues( std::vector<wdb::load::Level> & levels, const Felt
 	    if ( ( coeff != 1.0 )&&( term != 0.0) ) {
    			lev1 =   ( ( lev1 * coeff ) + term );
 	    }
-	    wdb::load::Level baseLevel( levelParameter, lev1, lev1 );
+	    float lev2;
+	    if ( field.level2() == 0 ) {
+	    	lev2 = lev1;
+	    }
+	    else {
+			lev2 = field.level2();
+		    if ( ( coeff != 1.0 )&&( term != 0.0) ) {
+	   			lev2 =   ( ( lev2 * coeff ) + term );
+		    }
+	    }
+	    wdb::load::Level baseLevel( levelParameter, lev1, lev2 );
 	    levels.push_back( baseLevel );
 	}
 	catch ( wdb::ignore_value &e )

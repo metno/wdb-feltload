@@ -192,7 +192,7 @@ int FeltField::level1() const
 int FeltField::level2() const
 {
 	if ( isEpsSingleRunParameter() )
-		return level1();
+		return 0;
 	return header_[13];
 }
 
