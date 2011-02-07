@@ -41,7 +41,7 @@ std::string FeltGridDefinition::getProjDefinition_(int gridType, const float * g
     	break;
     // TODO: Check the earth diameter ... again
     case 2:
-        projStr << "+proj=longlat +a=6367470.0 +no_defs";
+        projStr << "+proj=longlat +a=6367470.0 +towgs84=0,0,0 +no_defs";
         break;
     case 3:
         projStr << "+proj=ob_tran +o_proj=longlat +lon_0=" << (gs[4]) << " +o_lat_p=" << (90 - gs[5]) << " +a=6367470.0 +no_defs";

@@ -273,8 +273,7 @@ std::string FeltLoader::valueParameterName(const FeltField & field)
 	stringstream keyStr;
 	keyStr << field.parameter() << ", "
 		   << field.verticalCoordinate() << ", "
-		   << field.level1() << ", "
-		   << field.level2();
+		   << field.level1();
 	std::string ret;
 	try {
 		ret = felt2ValueParameter_[keyStr.str()];
@@ -284,8 +283,7 @@ std::string FeltLoader::valueParameterName(const FeltField & field)
 		stringstream akeyStr;
 		akeyStr << field.parameter() << ", "
 				<< field.verticalCoordinate() << ", "
-				<< "any, "
-				<< field.level2();
+				<< "any";
 		log.debugStream() << "Did not find " << keyStr.str() << ". Trying to find " << akeyStr.str();
 		ret = felt2ValueParameter_[akeyStr.str()];
 	}
@@ -300,8 +298,7 @@ std::string FeltLoader::valueParameterUnit(const FeltField & field)
 	stringstream keyStr;
 	keyStr << field.parameter() << ", "
 		   << field.verticalCoordinate() << ", "
-		   << field.level1() << ", "
-		   << field.level2();
+		   << field.level1();
 	std::string ret;
 	try {
 		ret = felt2ValueParameter_[keyStr.str()];
@@ -311,8 +308,7 @@ std::string FeltLoader::valueParameterUnit(const FeltField & field)
 		stringstream akeyStr;
 		akeyStr << field.parameter() << ", "
 				<< field.verticalCoordinate() << ", "
-				<< "any, "
-				<< field.level2();
+				<< "any";
 		ret = felt2ValueParameter_[akeyStr.str()];
 	}
 	ret = ret.substr( ret.find(',') + 1 );
