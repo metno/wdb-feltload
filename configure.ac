@@ -8,7 +8,7 @@
 #-----------------------------------------------------------------------------
 
 AC_PREREQ(2.59)
-AC_INIT(feltLoad, 0.9.8, [wdb@met.no])
+AC_INIT(feltLoad, 1.0.0, [wdb@met.no])
 # Config
 #AC_CONFIG_AUX_DIR([config])
 AC_CONFIG_SRCDIR([config.h.in])
@@ -80,7 +80,7 @@ LIBS="$LIBS $wdbload_LIBS"
 WDB_BOOST_CHECK(1.33.1)
 
 # LOG4CPP
-WDB_LOG4CPP_CHECK(0.3.5rc3)
+WDB_LOG4CPP_CHECK(1.0)
 
 WDB_PROJ_CHECK
 

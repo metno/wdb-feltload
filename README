@@ -1,0 +1,16 @@
+============================================================
+WDB - Water and Weather Database System
+============================================================
+
+Norwegian Meteorological Institute (met.no)
+Box 43 Blindern
+0313 OSLO
+NORWAY
+
+email: wdb@met.no
+
+WDB is a database system for storage and retrieval of weather and 
+water observations and forecasts. It handles both gridded data
+(raster) and point data.
+
+feltLoad is a loading program used to load met.no FELT files.
