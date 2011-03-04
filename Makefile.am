@@ -45,8 +45,10 @@ SED_SUBSTITUTION = 		sed s/__WDB_VERSION__/$(WDB_VERSION)/g $<\
 						| sed s:__WCI_LIB__:wci-$(WDB_VERSION).so:g \
 			 			> $@
 
+CLEANFILES =
 EXTRA_DIST =
 
+include doc/feltLoad.mk
 include etc/feltLoad.mk
 include src/feltLoad.mk
 include test/feltLoad.mk
