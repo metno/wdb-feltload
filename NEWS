@@ -1,3 +1,9 @@
+wdb-feltload (1.0.0) lucid; urgency=high
+
+  * Release version of WDB 1.0.0
+
+ -- Michael Akinde <wdb@met.no>  Wed, 09 Mar 2011 12:00:00 +0000
+
 wdb-feltload (1.0.0~rc1-1) lucid; urgency=low
 
   * New version (wdb). Updated metadata for wdb version 1.0.0. 
