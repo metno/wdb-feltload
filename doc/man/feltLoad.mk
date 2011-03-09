@@ -5,7 +5,7 @@
 	$(DOCBOOK) man $< -o `dirname $@`
 
 
-MAN_DOCS = doc/man/feltLoad.man.xml
+MAN_DOCS = doc/man/feltLoad.xml
 
 man1_MANS = $(MAN_DOCS:.xml=.1)
 
