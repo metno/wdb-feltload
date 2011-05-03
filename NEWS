@@ -1,14 +1,14 @@
+wdb-feltload (1.0.1-1) lucid; urgency=low
+
+  * Updated parameter metadata for sea water salinity. 
+
+ -- Michael Akinde <wdb@met.no>  Tue, 03 May 2011 12:00:00 +0000
+
 wdb-feltload (1.0.0-1) lucid; urgency=high
-
-  * Release version of WDB 1.0.0
-
- -- Michael Akinde <wdb@met.no>  Wed, 09 Mar 2011 12:00:00 +0000
-
-wdb-feltload (1.0.0~rc1-1) lucid; urgency=low
 
   * New version (wdb). Updated metadata for wdb version 1.0.0. 
 
- -- Michael Akinde <wdb@pmet.no>  Mon, 25 Jan 2011 12:00:00 +0000
+ -- Michael Akinde <wdb@met.no>  Wed, 09 Mar 2011 12:00:00 +0000
 
 wdb-feltload (0.9.7-1) hardy; urgency=low
 
