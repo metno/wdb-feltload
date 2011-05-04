@@ -57,7 +57,7 @@ void FeltGridDefinitionTest::test()
     //printIt(def);
     //std::cout << def.geometry()<< endl;
 
-    CPPUNIT_ASSERT_EQUAL(string("+proj=longlat +a=6367470.0 +no_defs"), def.projDefinition());
+    CPPUNIT_ASSERT_EQUAL(string("+proj=longlat +a=6367470.0 +towgs84=0,0,0 +no_defs"), def.projDefinition());
     CPPUNIT_ASSERT_EQUAL(187, def.getINumber());
     CPPUNIT_ASSERT_EQUAL(109, def.getJNumber());
     CPPUNIT_ASSERT_DOUBLES_EQUAL(0.5, def.getIIncrement(), 0);
