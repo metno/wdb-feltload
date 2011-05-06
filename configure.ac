@@ -59,7 +59,6 @@ AC_FUNC_MEMCMP
 
 # Check for libraries.
 AC_CXX_REQUIRE_STL
-VL_LIB_READLINE
 
 #-----------------------------------------------------------------------------
 # Module Checks

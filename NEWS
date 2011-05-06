@@ -1,6 +1,9 @@
-wdb-feltload (1.0.1-1) lucid; urgency=low
+wdb-feltload (1.0.1~rc1-1) lucid; urgency=low
 
-  * Updated parameter metadata for sea water salinity. 
+  * Updated parameter metadata for sea water salinity.
+  
+  * Removed libreadline from the dependency list. It is not used by 
+    feltLoad. 
 
  -- Michael Akinde <wdb@met.no>  Tue, 03 May 2011 12:00:00 +0000
 
