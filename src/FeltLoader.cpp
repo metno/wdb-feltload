@@ -100,9 +100,9 @@ namespace
 	std::string toString(const boost::posix_time::ptime & time )
 	{
 		if ( time == boost::posix_time::ptime(neg_infin) )
-			return "1900-01-01 00:00:00+00";
+			return "-infinity"; //"1900-01-01 00:00:00+00";
 		else if ( time == boost::posix_time::ptime(pos_infin) )
-			return "2100-01-01 00:00:00+00";
+			return "infinity";//"2100-01-01 00:00:00+00";
 		// ...always convert to zulu time
 		std::string ret = to_iso_extended_string(time) + "+00";
 		return ret;

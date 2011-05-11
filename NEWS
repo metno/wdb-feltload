@@ -1,3 +1,11 @@
+wdb-feltload (1.0.1~rc2-1) lucid; urgency=low
+
+  * Modified the storage of parameters with "infinite" time span such that
+    validtimefrom and validtimeto is set to -infinity and +infinity instead
+    of year 1900 and 2100. 
+
+ -- Michael Akinde <wdb@met.no>  Tue, 11 May 2011 12:00:00 +0000
+
 wdb-feltload (1.0.1~rc1-1) lucid; urgency=low
 
   * Updated parameter metadata for sea water salinity.
