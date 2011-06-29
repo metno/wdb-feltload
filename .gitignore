@@ -11,3 +11,5 @@
 /Makefile.in
 /config.h.in
 /config.guess
+/.cproject
+/.project

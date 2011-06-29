@@ -7,7 +7,7 @@
 
 
 # Scanned by Autoreconf; must be static (no expansion)
-ACLOCAL_AMFLAGS = 		-I m4
+ACLOCAL_AMFLAGS = 		-I ../wdb-config/m4
 				
 # Share directory organization
 wdbdatadir = 			$(datadir)/wdb
@@ -54,6 +54,6 @@ include src/feltLoad.mk
 include test/feltLoad.mk
 include test/configuration/feltLoad.mk
 
-include mk/debian.mk
+include ../wdb-config/mk/debian.mk
 
 debian: common-debian
