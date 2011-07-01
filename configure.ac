@@ -13,7 +13,7 @@ AC_INIT(feltLoad, 1.0.1, [wdb@met.no])
 #AC_CONFIG_AUX_DIR([config])
 AC_CONFIG_SRCDIR([config.h.in])
 AC_CONFIG_HEADER([config.h])
-AC_CONFIG_MACRO_DIR([../wdb-config/m4])
+AC_CONFIG_MACRO_DIR([config/m4])
 
 AC_PROG_LIBTOOL
 
@@ -65,15 +65,7 @@ AC_CXX_REQUIRE_STL
 #-----------------------------------------------------------------------------
 
 # WDBLOAD
-PKG_CHECK_MODULES([wdbload], [libwdbLoad],
-   	[
-		AC_SUBST(wdbload_CFLAGS)
-		AC_SUBST(wdbload_LIBS)
-	],
-	[AC_MSG_ERROR([Unable to find libwdbload.])
-])
-CPPFLAGS="$CPPFLAGS $wdbload_CFLAGS"
-LIBS="$LIBS $wdbload_LIBS"
+WDB_LIBWDBLOAD_CHECK
 
 # BOOST
 WDB_BOOST_CHECK(1.33.1)
