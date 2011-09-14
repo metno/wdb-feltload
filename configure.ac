@@ -64,18 +64,20 @@ AC_CXX_REQUIRE_STL
 # Module Checks
 #-----------------------------------------------------------------------------
 
-# WDBLOAD
-WDB_LIBWDBLOAD_CHECK
-
 # BOOST
 WDB_BOOST_CHECK(1.33.1)
 
 # LOG4CPP
 WDB_LOG4CPP_CHECK(1.0)
 
+# PROJ.4
 WDB_PROJ_CHECK
 
+# PQXX Lib
 WDB_PQXX_CHECK(2.6.8)
+
+# WDBLOAD
+WDB_LIBWDBLOAD_CHECK
 
 WDB_CPPUNIT
 

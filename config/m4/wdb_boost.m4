@@ -15,10 +15,10 @@ WDB_BOOST_BASE($req_boost_version)
 # Boost Base Header
 WDB_BOOST_BASE_HEADERS
 # Boost Program Options
-WDB_BOOST_PROGRAM_OPTIONS
 WDB_BOOST_DATE_TIME
-WDB_BOOST_REGEX
 WDB_BOOST_FILESYSTEM
+WDB_BOOST_PROGRAM_OPTIONS
+WDB_BOOST_REGEX
 WDB_BOOST_THREAD
 # Settings
 CPPFLAGS="$CPPFLAGS $BOOST_CPPFLAGS"
@@ -435,8 +435,10 @@ AC_DEFUN([WDB_BOOST_DATE_TIME],
                            for ax_lib in $BN $BN-$CC $BN-$CC-mt $BN-$CC-mt-s $BN-$CC-s $BN-mt\
                                lib$BN lib$BN-$CC lib$BN-$CC-mt lib$BN-$CC-mt-s lib$BN-$CC-s \
                                $BN-mgw $BN-mgw $BN-mgw-mt $BN-mgw-mt-s $BN-mgw-s ; do
-                              AC_CHECK_LIB($ax_lib, main, [BOOST_DATE_TIME_LIB="-l$ax_lib"; AC_SUBST(BOOST_DATE_TIME_LIB) link_date_time="yes"; break],
-                               [link_date_time="no"])
+                              AC_CHECK_LIB($ax_lib,
+                              			   main,
+                              			   [BOOST_DATE_TIME_LIB="-l$ax_lib"; AC_SUBST(BOOST_DATE_TIME_LIB) link_date_time="yes"; break],
+                               			   [link_date_time="no"])
                            done
             else
                for ax_lib in $ax_boost_user_date_time_lib $BN-$ax_boost_user_date_time_lib; do
