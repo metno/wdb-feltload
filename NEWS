@@ -1,3 +1,9 @@
+wdb-feltload (1.0.1~rc3-1) lucid; urgency=low
+
+  * Added data provider definition for proff.h12h8ppvum4. 
+
+ -- Michael Akinde <wdb@met.no>  Mon, 12 Sep 2011 12:00:00 +0000
+
 wdb-feltload (1.0.1~rc2-1) lucid; urgency=low
 
   * Modified the storage of parameters with "infinite" time span such that

@@ -64,26 +64,20 @@ AC_CXX_REQUIRE_STL
 # Module Checks
 #-----------------------------------------------------------------------------
 
-# WDBLOAD
-PKG_CHECK_MODULES([wdbload], [libwdbLoad],
-   	[
-		AC_SUBST(wdbload_CFLAGS)
-		AC_SUBST(wdbload_LIBS)
-	],
-	[AC_MSG_ERROR([Unable to find libwdbload.])
-])
-CPPFLAGS="$CPPFLAGS $wdbload_CFLAGS"
-LIBS="$LIBS $wdbload_LIBS"
-
 # BOOST
 WDB_BOOST_CHECK(1.33.1)
 
 # LOG4CPP
 WDB_LOG4CPP_CHECK(1.0)
 
+# PROJ.4
 WDB_PROJ_CHECK
 
+# PQXX Lib
 WDB_PQXX_CHECK(2.6.8)
+
+# WDBLOAD
+WDB_LIBWDBLOAD_CHECK
 
 WDB_CPPUNIT
 
