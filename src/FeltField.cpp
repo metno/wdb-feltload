@@ -200,6 +200,8 @@ int FeltField::level2() const
 void FeltField::grid(std::vector<word> & out) const
 {
 	size_t from = (startingGridBlock() * blockWords) + 20;
+	if (header_[6] > 1) //offset
+		from += header_[6] - 1;
 	size_t size = gridSize();
 	feltFile_.get_(out, from, size);
 }
@@ -248,6 +250,9 @@ const std::vector<word> & FeltField::getGridHeader_() const
 	{
 		size_t startingBlock = startingGridBlock();
 		size_t readFrom = startingBlock * blockWords;
+		if (header_[6] > 1) //offset
+			readFrom += header_[6] - 1;
+
 		feltFile_.get_(gridHeader_, readFrom, 20);
 	}
 	return gridHeader_;
@@ -262,9 +267,11 @@ void FeltField::getExtraGeometrySpecification_(std::vector<short int> & out) con
 	out.resize(readSize);
 
 	size_t readFrom = (startingGridBlock() * blockWords) + gridSize() + 20;
+	if (header_[6] > 1) //offset
+		readFrom += header_[6] - 1;
+
 	std::vector<word> gs;
 	feltFile_.get_(gs, readFrom, readSize);
-
 //	for_each(gs.get(), gs.get() + readSize, swapByteOrder);
 
 //	for ( int i = 0; i < readSize; ++ i )
