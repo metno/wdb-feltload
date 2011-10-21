@@ -1,3 +1,9 @@
+wdb-feltload (1.0.1~rc4-1) lucid; urgency=low
+
+  * Fixed felt-ID 101 in the metadata. 
+
+ -- Michael Akinde <wdb@met.no>  Wed, 19 Oct 2011 12:00:00 +0000
+
 wdb-feltload (1.0.1~rc3-1) lucid; urgency=low
 
   * Added data provider definition for proff.h12h8ppvum4. 
