@@ -1,31 +1,19 @@
-wdb-feltload (1.0.1~rc4-1) lucid; urgency=low
+wdb-feltload (1.0.1-1) lucid; urgency=low
 
-  * Fixed felt-ID 101 in the metadata. 
+  * Fixed felt-ID 101 in the metadata.
 
- -- Michael Akinde <wdb@met.no>  Wed, 19 Oct 2011 12:00:00 +0000
-
-wdb-feltload (1.0.1~rc3-1) lucid; urgency=low
-
-  * Added data provider definition for proff.h12h8ppvum4. 
-
- -- Michael Akinde <wdb@met.no>  Mon, 12 Sep 2011 12:00:00 +0000
-
-wdb-feltload (1.0.1~rc2-1) lucid; urgency=low
+  * Added data provider definition for proff.h12h8ppvum4.
 
   * Modified the storage of parameters with "infinite" time span such that
     validtimefrom and validtimeto is set to -infinity and +infinity instead
-    of year 1900 and 2100. 
-
- -- Michael Akinde <wdb@met.no>  Tue, 11 May 2011 12:00:00 +0000
-
-wdb-feltload (1.0.1~rc1-1) lucid; urgency=low
+    of year 1900 and 2100.
 
   * Updated parameter metadata for sea water salinity.
-  
-  * Removed libreadline from the dependency list. It is not used by 
-    feltLoad. 
 
- -- Michael Akinde <wdb@met.no>  Tue, 03 May 2011 12:00:00 +0000
+  * Removed libreadline from the dependency list. It is not used by
+    feltLoad.
+
+ -- Vegard Bønes <vegardb@wdb-dev2.met.no>  Tue, 21 Feb 2012 10:15:41 +0000
 
 wdb-feltload (1.0.0-1) lucid; urgency=high
 
