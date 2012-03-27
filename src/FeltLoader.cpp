@@ -52,10 +52,13 @@ using namespace boost::filesystem;
 
 namespace {
 
-path getConfigFile( const path & fileName )
+path getConfigFile( const path & sysPath, const path & fileName )
 {
-	static const path sysConfDir = SYSCONFDIR;
-	path confPath = sysConfDir/fileName;
+	path confPath;
+	if (sysPath.empty())
+		confPath = SYSCONFDIR/fileName;
+	else
+		confPath = sysPath/fileName;
 	return confPath;
 }
 
@@ -66,16 +69,17 @@ namespace felt
 
 FeltLoader::FeltLoader(	LoaderDatabaseConnection & connection,
 						const wdb::load::LoaderConfiguration::LoadingOptions & loadingOptions,
+						const wdb::load::LoaderConfiguration::MetadataOptions & metadataOptions,
 						wdb::WdbLogHandler & logHandler )
 	: connection_(connection),
 	  loadingOptions_(loadingOptions),
 	  logHandler_(logHandler)
 {
-	felt2DataProviderName_.open( getConfigFile("dataprovider.conf").file_string() );
-	felt2ValidTime_.open( getConfigFile("validtime.conf").file_string() );
-	felt2ValueParameter_.open( getConfigFile("valueparameter.conf").file_string() );
-	felt2LevelParameter_.open( getConfigFile("levelparameter.conf").file_string() );
-	felt2LevelAdditions_.open( getConfigFile("leveladditions.conf").file_string() );
+	felt2DataProviderName_.open( getConfigFile(metadataOptions.path, "dataprovider.conf").file_string() );
+	felt2ValidTime_.open( getConfigFile(metadataOptions.path, "validtime.conf").file_string() );
+	felt2ValueParameter_.open( getConfigFile(metadataOptions.path, "valueparameter.conf").file_string() );
+	felt2LevelParameter_.open( getConfigFile(metadataOptions.path, "levelparameter.conf").file_string() );
+	felt2LevelAdditions_.open( getConfigFile(metadataOptions.path, "leveladditions.conf").file_string() );
 }
 
 FeltLoader::~FeltLoader()

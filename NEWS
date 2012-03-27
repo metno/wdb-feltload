@@ -1,3 +1,10 @@
+wdb-feltload (1.0.2~rc1-1) lucid; urgency=low
+
+  * Added the metadata option to permit the specification of the
+    config file location.  
+
+ -- Michael Akinde <wdb@met.no>  Mon, 26 Mar 2012 14:00:00 +0000
+
 wdb-feltload (1.0.1-1) lucid; urgency=low
 
   * Fixed felt-ID 101 in the metadata.

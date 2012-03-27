@@ -131,7 +131,7 @@ int main(int argc, char ** argv)
 		else
 		{
 			wdb::load::LoaderDatabaseConnection dbConnection( conf );
-			felt::FeltLoader loader( dbConnection, conf.loading(), logHandler );
+			felt::FeltLoader loader( dbConnection, conf.loading(), conf.metadata(), logHandler );
 			for ( std::vector<boost::filesystem::path>::const_iterator it = files.begin(); it != files.end(); ++ it )
 			{
 				try

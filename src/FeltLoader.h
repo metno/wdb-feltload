@@ -49,6 +49,7 @@ class FeltLoader
 public:
 	FeltLoader(wdb::load::LoaderDatabaseConnection & connection,
 			const wdb::load::LoaderConfiguration::LoadingOptions & loadingOptions,
+			const wdb::load::LoaderConfiguration::MetadataOptions & metadataOptions,
 			wdb::WdbLogHandler & logHandler);
 	~FeltLoader();
 
