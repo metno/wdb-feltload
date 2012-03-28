@@ -1,4 +1,3 @@
-wdb-feltload (1.0.2~rc1-1) lucid; urgency=low
 
   * Added the metadata option to permit the specification of the
     config file location.  
