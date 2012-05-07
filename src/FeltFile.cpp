@@ -48,11 +48,11 @@ FeltFile::FeltFile(const path & file)
 	: fileName_(file), changeEndianness_(false)
 {
 	if ( ! exists(file) )
-		throw runtime_error("Cannot find file " + file.native_file_string() );
+		throw runtime_error("Cannot find file " + file.string() );
 	if ( is_directory(file) )
-		throw runtime_error(file.native_directory_string() + " is a directory, not a file");
+		throw runtime_error(file.string() + " is a directory, not a file");
 
-	string fileName = file.native_file_string();
+	string fileName = file.string();
 	feltFile_ = new boost::filesystem::ifstream(file);
 
 	word head;
