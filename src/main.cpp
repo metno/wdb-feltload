@@ -111,7 +111,7 @@ int main(int argc, char ** argv)
 		{
 			for ( std::vector<boost::filesystem::path>::const_iterator it = files.begin(); it != files.end(); ++ it )
 			{
-				std::cout << it->native_file_string() << std::endl;
+				std::cout << it->string() << std::endl;
 				felt::FeltFile f(*it);
 				std::cout << "Size:\t" << f.size() << std::endl;
 				for ( felt::FeltFile::const_iterator fit = f.begin(); fit != f.end(); ++ fit )
@@ -122,7 +122,7 @@ int main(int argc, char ** argv)
 					}
 					catch( std::exception & e )
 					{
-						std::cout << "ERROR: Unable to read file " << it->native_file_string() << "\n" << std::endl;
+						std::cout << "ERROR: Unable to read file " << it->string() << "\n" << std::endl;
 					}
 				}
 			}
@@ -141,7 +141,7 @@ int main(int argc, char ** argv)
 				}
 				catch ( std::exception & e )
 				{
-					log.errorStream() << "Unable to load file " << it->native_file_string();
+					log.errorStream() << "Unable to load file " << it->string();
 					log.errorStream() << "Reason: " << e.what();
 				}
 			}

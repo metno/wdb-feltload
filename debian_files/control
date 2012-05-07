@@ -7,7 +7,7 @@ Build-Depends: debhelper (>= 5),
  libwdbload2
 Build-Conflicts: autoconf2.13,
  automake1.4
-Standards-Version: 3.9.1
+Standards-Version: 3.9.3
 
 Package: wdb-feltload
 Architecture: any
