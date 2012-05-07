@@ -75,11 +75,11 @@ FeltLoader::FeltLoader(	LoaderDatabaseConnection & connection,
 	  loadingOptions_(loadingOptions),
 	  logHandler_(logHandler)
 {
-	felt2DataProviderName_.open( getConfigFile(metadataOptions.path, "dataprovider.conf").file_string() );
-	felt2ValidTime_.open( getConfigFile(metadataOptions.path, "validtime.conf").file_string() );
-	felt2ValueParameter_.open( getConfigFile(metadataOptions.path, "valueparameter.conf").file_string() );
-	felt2LevelParameter_.open( getConfigFile(metadataOptions.path, "levelparameter.conf").file_string() );
-	felt2LevelAdditions_.open( getConfigFile(metadataOptions.path, "leveladditions.conf").file_string() );
+	felt2DataProviderName_.open( getConfigFile(metadataOptions.path, "dataprovider.conf").string() );
+	felt2ValidTime_.open( getConfigFile(metadataOptions.path, "validtime.conf").string() );
+	felt2ValueParameter_.open( getConfigFile(metadataOptions.path, "valueparameter.conf").string() );
+	felt2LevelParameter_.open( getConfigFile(metadataOptions.path, "levelparameter.conf").string() );
+	felt2LevelAdditions_.open( getConfigFile(metadataOptions.path, "leveladditions.conf").string() );
 }
 
 FeltLoader::~FeltLoader()
