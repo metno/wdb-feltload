@@ -4,6 +4,7 @@ Priority: extra
 Maintainer: Vegard Bønes <wdb@met.no>
 Build-Depends: debhelper (>= 5),
  autotools-dev,
+ cdbs,
  libwdbload2
 Build-Conflicts: autoconf2.13,
  automake1.4
