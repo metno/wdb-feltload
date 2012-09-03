@@ -1,3 +1,9 @@
+wdb-feltload (1.0.4-1) precise; urgency=low
+
+  * fixed command line option bug
+
+ -- Michael Akinde <wdb@met.no>  Mon, 03 Sep 2012 12:44:08 +0200
+
 wdb-feltload (1.0.3-1) lucid; urgency=low
 
   * Added the metadata option to permit the specification of the
