@@ -48,7 +48,6 @@ getFeltLoading( FeltLoadConfiguration::FeltLoadingOptions & out )
 FeltLoadConfiguration::FeltLoadConfiguration() :
 	wdb::load::LoaderConfiguration("")
 {
-	cmdOptions().add( getFeltLoading( feltLoading_ ) );
 	configOptions().add( getFeltLoading( feltLoading_ ) );
 	shownOptions().add( getFeltLoading( feltLoading_ ) );
 }
