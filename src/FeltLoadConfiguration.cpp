@@ -34,7 +34,8 @@ using namespace boost::program_options;
 
 options_description
 getFeltLoading( FeltLoadConfiguration::FeltLoadingOptions & out )
-{
+{<<<<<<< HEAD
+
     options_description input( "Felt Loading" );
     input.add_options()
     ( "referenceTime,t", value<std::string>( & out.referenceTime ), "Store data into database using the given reference time, instead of whatever the given document(s) say" )
@@ -48,7 +49,6 @@ getFeltLoading( FeltLoadConfiguration::FeltLoadingOptions & out )
 FeltLoadConfiguration::FeltLoadConfiguration() :
 	wdb::load::LoaderConfiguration("")
 {
-	cmdOptions().add( getFeltLoading( feltLoading_ ) );
 	configOptions().add( getFeltLoading( feltLoading_ ) );
 	shownOptions().add( getFeltLoading( feltLoading_ ) );
 }

@@ -8,7 +8,7 @@
 #-----------------------------------------------------------------------------
 
 AC_PREREQ(2.59)
-AC_INIT(feltLoad, 1.0.4, [wdb@met.no])
+AC_INIT(feltLoad, 1.0.5, [wdb@met.no])
 # Config
 #AC_CONFIG_AUX_DIR([config])
 AC_CONFIG_SRCDIR([config.h.in])
