@@ -1,3 +1,9 @@
+wdb-feltload (1.0.4~rc1-1) lucid; urgency=low
+
+  * Added parameter codes for EC WAM.  
+
+ -- Michael Akinde <wdb@met.no>  Thu, 18 Oct 2012 21:00:00 +0000
+
 wdb-feltload (1.0.3-1) lucid; urgency=low
 
   * Added the metadata option to permit the specification of the
