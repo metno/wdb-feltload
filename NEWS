@@ -2,7 +2,7 @@ wdb-feltload (1.0.6-1) lucid; urgency=low
 
   * Corrected and updated parameter codes for Swan, WAM, EC WAM, and ROMS data.  
 
- -- Michael Akinde <wdb@met.no>  Thu, 18 Oct 2012 21:00:00 +0000
+ -- Michael Akinde <wdb@met.no>  Fri, 14 Dec 2012 02:00:00 +0000
 
 wdb-feltload (1.0.5-1) lucid; urgency=low
 
