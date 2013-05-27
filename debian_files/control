@@ -5,7 +5,7 @@ Maintainer: Vegard Bønes <wdb@met.no>
 Build-Depends: debhelper (>= 5),
  autotools-dev,
  cdbs,
- libwdbload2
+ libwdbload2-dev
 Build-Conflicts: autoconf2.13,
  automake1.4
 Standards-Version: 3.9.3
@@ -13,8 +13,7 @@ Standards-Version: 3.9.3
 Package: wdb-feltload
 Architecture: any
 Depends: ${shlibs:Depends},
- ${misc:Depends},
- libwdbload2
+ ${misc:Depends}
 Description: Load met.no proprietary FELT files into wdb
  A loader program for transferring forecasts from met.no FELT files into a 
  wdb database
