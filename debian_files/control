@@ -1,20 +1,22 @@
-Source: wdb-feltload  
+Source: wdb-feltload-1.1
 Section: science
 Priority: extra
-Maintainer: Vegard Bønes <wdb@met.no>
+Maintainer: WDB Group, Meteorologisk institutt <wdb@met.no>
+Uploaders: Michael O. Akinde <michael.akinde@met.no>
 Build-Depends: debhelper (>= 5),
  autotools-dev,
  cdbs,
- libwdbload2
+ libwdbload3
 Build-Conflicts: autoconf2.13,
  automake1.4
 Standards-Version: 3.9.3
 
-Package: wdb-feltload
+Package: wdb-feltload-1.1
 Architecture: any
 Depends: ${shlibs:Depends},
  ${misc:Depends},
- libwdbload2
+ libwdbload3
+Provides: wdb-feltload
 Description: Load met.no proprietary FELT files into wdb
  A loader program for transferring forecasts from met.no FELT files into a 
  wdb database

@@ -1,3 +1,10 @@
+wdb-feltload-1.1 (1.1.0~rc1-1) lucid; urgency=low
+
+  * Updated the feltload naming scheme to conform to met.no
+    standard package naming.  
+
+ -- Michael Akinde <wdb@met.no>  Mon, 17 Jun 2013 12:00:00 +0000
+
 wdb-feltload (1.0.6-1) lucid; urgency=low
 
   * Corrected and updated parameter codes for Swan, WAM, EC WAM, and ROMS data.  
