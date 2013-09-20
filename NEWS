@@ -1,4 +1,4 @@
-wdb-feltload-1.1 (1.1.0~rc1-1) lucid; urgency=low
+wdb-feltload (1.1.0~rc1-1) lucid; urgency=low
 
   * Updated the feltload naming scheme to conform to met.no
     standard package naming.  
