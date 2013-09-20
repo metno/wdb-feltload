@@ -14,8 +14,7 @@ Standards-Version: 3.9.3
 Package: wdb-feltload-1.1
 Architecture: any
 Depends: ${shlibs:Depends},
- ${misc:Depends},
- libwdbload3
+ ${misc:Depends}
 Provides: wdb-feltload
 Description: Load met.no proprietary FELT files into wdb
  A loader program for transferring forecasts from met.no FELT files into a 
