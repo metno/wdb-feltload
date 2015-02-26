@@ -48,9 +48,9 @@ FeltFile::FeltFile(const path & file)
 	: fileName_(file), changeEndianness_(false)
 {
 	if ( ! exists(file) )
-		throw runtime_error("Cannot find file " + file.string() );
+		throw ReadError("Cannot find file " + file.string() );
 	if ( is_directory(file) )
-		throw runtime_error(file.string() + " is a directory, not a file");
+		throw ReadError(file.string() + " is a directory, not a file");
 
 	string fileName = file.string();
 	feltFile_ = new boost::filesystem::ifstream(file);
@@ -64,7 +64,7 @@ FeltFile::FeltFile(const path & file)
 	block1_ = getBlock_(0);
 
 	if ( not complete() )
-		throw std::runtime_error("File update is not complete yet");
+		throw ReadError("File update is not complete yet");
 
 	const size_t fieldCount = block1_[9];
 	fields_.reserve(fieldCount);

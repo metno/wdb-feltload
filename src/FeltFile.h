@@ -46,6 +46,13 @@ namespace felt
 class FeltFile : boost::noncopyable
 {
 public:
+
+	class ReadError : public std::runtime_error
+	{
+	public:
+		explicit ReadError(const std::string & msg) : std::runtime_error(msg) {}
+	};
+
 	explicit FeltFile(const boost::filesystem::path & file);
 	~FeltFile();
 

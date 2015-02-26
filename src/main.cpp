@@ -32,6 +32,7 @@
 #include "FeltLoadConfiguration.h"
 #include "FeltFile.h"
 #include "FeltLoader.h"
+#include <wdb/errors.h>
 #include <wdb/LoaderDatabaseConnection.h>
 #include <wdb/LoaderConfiguration.h>
 #include <wdbLogHandler.h>
@@ -78,22 +79,21 @@ int main(int argc, char ** argv)
 	try
     {
     	conf.parse( argc, argv );
-    	if ( conf.general().help )
-    	{
-    		help( conf.shownOptions(), cout );
-    		return 0;
-    	}
-    	if ( conf.general().version )
-    	{
-    		version( cout );
-    		return 0;
-    	}
-    }
-    catch( exception & e ) {
-        cerr << e.what() << endl;
-        help( conf.shownOptions(), clog );
-        return 1;
-    }
+	} catch (wdb::load::LoadError & e)
+	{
+		std::clog << e.what() << std::endl;
+		return wdb::load::exitStatus();
+	}
+	if ( conf.general().help )
+	{
+		help( conf.shownOptions(), cout );
+		return 0;
+	}
+	if ( conf.general().version )
+	{
+		version( cout );
+		return 0;
+	}
 
 	wdb::WdbLogHandler logHandler( conf.logging().loglevel, conf.logging().logfile );
     WDB_LOG & log = WDB_LOG::getInstance( "wdb.feltload.main" );
@@ -139,17 +139,32 @@ int main(int argc, char ** argv)
 					felt::FeltFile feltFile(* it);
 					loader.load(feltFile);
 				}
+				catch ( felt::FeltFile::ReadError & e )
+				{
+					wdb::load::registerError(wdb::load::ErrorWhenReadingFile);
+					log.errorStream() << wdb::load::getErrorMessage();
+				}
 				catch ( std::exception & e )
 				{
+					wdb::load::registerError(wdb::load::UnknownError);
 					log.errorStream() << "Unable to load file " << it->string();
 					log.errorStream() << "Reason: " << e.what();
 				}
 			}
 		}
 	}
+	catch ( wdb::load::LoadError & e )
+	{
+		WDB_LOG & log = WDB_LOG::getInstance("wdb.load.felt");
+		log.fatal(e.what());
+		return wdb::load::exitStatus();
+	}
 	catch ( std::exception & e )
 	{
 		log.fatalStream() << e.what();
-		return 1;
+		return int(wdb::load::UnknownError);
 	}
+
+	return wdb::load::exitStatus();
+
 }

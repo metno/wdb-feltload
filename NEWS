@@ -1,3 +1,9 @@
+wdb-feltload (1.2.0-1) precise; urgency=low
+
+  * new version, with new exit codes
+
+ -- Michael Akinde <wdb@met.no>  Thu, 26 Feb 2015 16:23:36 +0100
+
 wdb-feltload (1.1.0~rc1-1) lucid; urgency=low
 
   * Updated the feltload naming scheme to conform to met.no

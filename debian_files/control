@@ -11,7 +11,7 @@ Build-Conflicts: autoconf2.13,
  automake1.4
 Standards-Version: 3.9.3
 
-Package: wdb-feltload-1.1
+Package: wdb-feltload-1.2
 Architecture: any
 Depends: ${shlibs:Depends},
  ${misc:Depends}

@@ -31,6 +31,7 @@
 #endif
 #include "FeltLoader.h"
 #include "FeltFile.h"
+#include <wdb/errors.h>
 #include <wdb/LoaderDatabaseConnection.h>
 #include <wdbLogHandler.h>
 #include <GridGeometry.h>
@@ -154,6 +155,7 @@ void FeltLoader::load(const felt::FeltField & field)
 	}
 	catch ( std::out_of_range &e )
 	{
+		wdb::load::registerError(wdb::load::FieldFailedToLoad);
 		log.errorStream() << "Metadata missing for data value. " << e.what() << " Data field not loaded.";
 	}
 	/* Note supported < pqxx 3.0.0
@@ -164,6 +166,7 @@ void FeltLoader::load(const felt::FeltField & field)
 	*/
 	catch ( std::exception & e )
 	{
+		wdb::load::registerError(wdb::load::FieldFailedToLoad);
 		log.errorStream() << e.what() << " Data field not loaded.";
 	}
 }
@@ -447,6 +450,11 @@ void FeltLoader::getValues(std::vector<float> & out, const FeltField & field)
 	float coeff = 1.0;
 	float term = 0.0;
 	connection_.readUnit( valueParameterUnit(field), &coeff, &term );
+
+	WDB_LOG & log = WDB_LOG::getInstance( "wdb.feltLoad.feltLoader" );
+	log.debugStream() << "Conversion: coefficient: " << coeff <<", term: " << term;
+	log.debugStream() << "Example: " << float(rawData[10]) << " -> " <<
+			value_convert<float>(scale, coeff, term, connection_.getUndefinedValue())(rawData[10]);
 
 	std::transform(rawData.begin(), rawData.end(), std::back_inserter(out),
 			value_convert<float>(scale, coeff, term, connection_.getUndefinedValue()));
