@@ -156,7 +156,7 @@ void FeltLoader::load(const felt::FeltField & field)
 	catch ( std::out_of_range &e )
 	{
 		wdb::load::registerError(wdb::load::FieldFailedToLoad);
-		log.errorStream() << "Metadata missing for data value. " << e.what() << " Data field not loaded.";
+		log.warnStream() << "Metadata missing for data value. " << e.what() << " Data field not loaded.";
 	}
 	/* Note supported < pqxx 3.0.0
 	catch (pqxx::unique_violation &e) {
@@ -167,7 +167,7 @@ void FeltLoader::load(const felt::FeltField & field)
 	catch ( std::exception & e )
 	{
 		wdb::load::registerError(wdb::load::FieldFailedToLoad);
-		log.errorStream() << e.what() << " Data field not loaded.";
+		log.warnStream() << e.what() << " Data field not loaded.";
 	}
 }
 
