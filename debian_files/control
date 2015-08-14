@@ -6,7 +6,7 @@ Uploaders: Michael O. Akinde <michael.akinde@met.no>
 Build-Depends: debhelper (>= 7),
  autotools-dev,
  cdbs,
- libwdbload3
+ libwdbload-dev
 Build-Conflicts: autoconf2.13,
  automake1.4
 Standards-Version: 3.9.3

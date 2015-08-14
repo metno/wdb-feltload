@@ -1,3 +1,10 @@
+wdb-feltload (1.2.2-1) precise; urgency=low
+
+  * Rename data provider 'nordic' to 'nordic roms 4000m'
+  * Split data provider 'wam norway' into 'wam norway {50000,10000,4000}m'
+
+ -- Kim Tore Jensen <kimtj@met.no>  Wed, 12 Aug 2015 11:06:00 +0200
+
 wdb-feltload (1.2.1-1) precise; urgency=low
 
   * new version, with corrected logging levels
